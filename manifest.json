@@ -1,16 +1,11 @@
 {
-  "short_name": "FireExecPro",
-  "name": "Fire Executive Pro - Local Offline",
-  "icons": [
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚒</text></svg>",
-      "type": "image/svg+xml",
-      "sizes": "192x192 512x512"
-    }
-  ],
+  "name": "دستیار اجرایی آتش‌نشانی",
+  "short_name": "آتش‌نشانی",
   "start_url": "./index.html",
-  "background_color": "#121212",
-  "theme_color": "#d32f2f",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "any"
+  "background_color": "#0d1322",
+  "theme_color": "#e11d48",
+  "lang": "fa",
+  "dir": "rtl"
 }

@@ -1,0 +1,1 @@
+Offline Final v1: local Three.js, local font paths, manifest, service worker, external favicon removed.
