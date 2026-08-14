@@ -13,9 +13,9 @@ v7.3.2 — نسخه نهایی:
 -->
 <link rel="icon" href="https://image.qwenlm.ai/public_source/b0cd9218-7e83-4974-9d39-b39f90f741b8/1450e3cab-0fcd-4149-b973-b2b5e42cbb98.png">
 <meta name="theme-color" content="#e11d48">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.1.0/400.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.1.0/700.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.1.0/800.css">
+<link rel="manifest" href="./manifest.json">
+
+<style id="local-vazirmatn">@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:400;font-display:swap;src:url("./assets/fonts/Vazirmatn-Regular.woff2") format("woff2");}@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:500;font-display:swap;src:url("./assets/fonts/Vazirmatn-Medium.woff2") format("woff2");}@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:700;font-display:swap;src:url("./assets/fonts/Vazirmatn-Bold.woff2") format("woff2");}@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:800;font-display:swap;src:url("./assets/fonts/Vazirmatn-ExtraBold.woff2") format("woff2");}</style>
 <style>
 :root{--bg:#f4f6fb;--card:#fff;--text:#182135;--muted:#5c6b84;--border:#e3e9f3;--prim:#e11d48;--prim2:#f97316;--grad:linear-gradient(135deg,#f97316,#e11d48);--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--info:#2563eb;--chip:#eef2f9;--shadow:0 6px 24px rgba(23,32,63,.08);--r:16px;--line:#e3e9f3;--card2:#eef2f9;--accent:#e11d48}
 html[data-theme="dark"]{--bg:#0d1322;--card:#161e31;--text:#e8edf7;--muted:#93a1bb;--border:#26314a;--chip:#1d2740;--shadow:0 8px 28px rgba(0,0,0,.35);--line:#26314a;--card2:#1d2740;--accent:#f97316}
@@ -191,7 +191,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 @media(max-width:900px){.floorGrid{grid-template-columns:repeat(2,1fr)}.floorSummary{grid-template-columns:repeat(2,1fr)}.ruleGrid{grid-template-columns:1fr}}
 @media(max-width:800px){.m3Grid,.codeGrid{grid-template-columns:1fr}.m3Search{grid-template-columns:1fr}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="./assets/js/three.min.js"></script>
 </head>
 <body>
 <header>
@@ -1245,8 +1245,8 @@ setTimeout(dropPhotoCache,1500);
 async function doPreview(){
 const map=await collectPhotoMap();
 const html='<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><title>پیش‌نمایش گزارش</title>'+
-'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.1.0/400.css">'+
-'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.1.0/700.css"></head>'+
+''+
+'</head>'+
 '<body style="background:#f4f6fb;padding:20px">'+buildReportHTML(map)+'</body></html>';
 const win=window.open('','_blank');
 if(win){win.document.write(html);win.document.close();setTimeout(dropPhotoCache,1500);}
@@ -2365,252 +2365,3 @@ window.FEPProjectAudit={run};
 </script>
 </body>
 </html>
-.modal{position:fixed;inset:0;background:rgba(5,10,25,.85);z-index:200;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
-.modal img{max-width:92%;max-height:80%;border-radius:14px}
-.modal button{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:50%;width:42px;height:42px;cursor:pointer}
-.modalBox{background:var(--card);border-radius:16px;padding:20px;max-width:540px;width:100%}
-#toasts{position:fixed;bottom:18px;right:50%;transform:translateX(50%);z-index:300;display:flex;flex-direction:column;gap:8px;align-items:center}
-.toast{background:#111827;color:#fff;border-radius:12px;padding:10px 20px;font-size:13px;font-weight:700;opacity:0;transition:.3s}
-.toast.show{opacity:1}
-#printArea{display:none}
-@media print{body>*:not(#printArea){display:none!important}#printArea{display:block!important}}
-footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0}
-.auditGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.auditItem{padding:10px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
-.auditItem b{display:block;margin-bottom:4px}
-.auditSmall{font-size:12px;opacity:.8}
-.netTable{width:100%;border-collapse:collapse;font-size:11.5px}
-.netTable th,.netTable td{border:1px solid var(--border);padding:5px;text-align:center}
-.netTable input{width:78px;padding:5px;font-size:11px}
-.list{display:grid;gap:8px}
-.listItem{border:1px solid var(--border);border-radius:12px;padding:10px 12px}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.row>input{flex:1;min-width:90px}
-.grid2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.grid3{display:grid;gap:8px;grid-template-columns:repeat(3,1fr)}
-.resultGrid{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-.stat{border:1px solid var(--border);border-radius:10px;padding:8px 10px;font-size:12px}
-.tableWrap{overflow:auto}
-.tableWrap table{width:100%;border-collapse:collapse;font-size:12px}
-.tableWrap th,.tableWrap td{border:1px solid var(--border);padding:5px 7px}
-.floorGrid{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px}
-.floorTable{width:100%;border-collapse:collapse}
-.floorTable th,.floorTable td{border:1px solid var(--line);padding:8px}
-.occChip{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:5px 9px;margin:3px;background:var(--card2);cursor:pointer}
-.occChip.on{border-color:var(--accent)}
-.floorSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.floorStat{padding:12px;border:1px solid var(--line);border-radius:10px}
-.floorStat b{display:block;font-size:20px}
-.m3Hero{background:linear-gradient(135deg,#fff7ed,#eff6ff);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:14px}
-.m3Grid{display:grid;grid-template-columns:280px 1fr;gap:14px}
-.m3Chapter{display:block;width:100%;text-align:right;border:0;background:transparent;padding:9px 10px;border-radius:10px;cursor:pointer}
-.m3Chapter.on{background:var(--chip);font-weight:800}
-.m3Ref{border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
-.m3Meta{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0}
-.m3Tag{background:var(--chip);border-radius:999px;padding:4px 8px;font-size:11px}
-.m3Text{white-space:pre-wrap;line-height:2;font-size:13px}
-.m3Source{font-size:11px;color:var(--muted);margin-top:8px}
-.m3Search{display:grid;grid-template-columns:1fr 180px auto;gap:8px}
-.codeChip{display:block;width:100%;text-align:right;border:0;background:transparent;padding:9px 10px;border-radius:10px;cursor:pointer}
-.codeChip.on{background:var(--chip);font-weight:800}
-.codeStatus{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800}
-.codeStatus.source{background:#dcfce7;color:#166534}
-.codeStatus.review{background:#e0e7ff;color:#3730a3}
-.ruleGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.ruleItem{border:1px solid var(--line);border-radius:10px;padding:10px}
-.ruleItem b{display:block;margin-bottom:4px}
-@media(max-width:800px){.m3Grid{grid-template-columns:1fr}.m3Search{grid-template-columns:1fr}.floorGrid{grid-template-columns:repeat(2,1fr)}.floorSummary{grid-template-columns:repeat(2,1fr)}.ruleGrid{grid-template-columns:1fr}}
-</style>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-</head>
-<body>
-<header>
-<div class="wrap headerRow">
-<div class="brand"><img src="icon.png" alt="لوگو"><div><h1>🚒 دستیار اجرایی آتش‌نشانی</h1><p>مبحث ۳ (۱۳۹۵) و مبحث ۱۴ (۱۳۹۶) + NFPA · نسخه GitHub</p></div></div>
-<div class="projBox"><span id="netBadge" class="netBadge hidden">📴 آفلاین</span><label>📁 پروژه</label><select id="projSel" style="width:auto"></select><button class="btn small primary" id="btnProjNew">➕</button><button class="btn small ghost" id="btnProjRen">✏️</button><button class="btn small danger" id="btnProjDel">🗑</button><button class="btn small ghost" id="btnTheme">🌙</button></div>
-</div>
-<div class="wrap typeBar" id="typeBar"></div>
-</header>
-<nav class="tabsWrap"><div class="wrap tabs" id="tabs"></div></nav>
-<main class="wrap">
-<section class="sec" id="sec-dash"><div class="disclaimer">⚠️ نتایج صرفاً «برآورد اولیه» است؛ طراحی قطعی نیازمند مهر مهندس دارای پروانه اشتغال است.</div><div class="grid" id="dashStats"></div><div class="grid" style="margin-top:16px"><div class="card"><h3>⏰ مهلت‌های پیش رو</h3><div id="dashDead"></div></div><div class="card wide"><div class="cardHead"><div><h3>📋 محاسبات ذخیره‌شده</h3></div><div class="actions"><button class="btn small primary" id="btnPrintAll">🖨️ چاپ</button><button class="btn small danger" id="btnDelAllCalcs">🗑</button></div></div><div id="dashCalcs"></div></div></div></section>
-<section class="sec hidden" id="sec-calcs"><div class="grid">
-<div class="card"><h3>🌫 ۱) تهویه پارکینگ</h3><div class="formRow"><div class="field"><label>طول</label><input type="number" id="c1L" value="60"></div><div class="field"><label>عرض</label><input type="number" id="c1W" value="40"></div><div class="field"><label>ارتفاع</label><input type="number" id="c1H" value="3"></div><div class="field"><label>ACH</label><input type="number" id="c1ACH" value="6"></div><div class="field"><label>خودرو</label><input type="number" id="c1Car" value="120"></div></div><div class="radioRow"><label><input type="radio" name="m1" value="80">۸۰٪</label><label><input type="radio" name="m1" value="85" checked>۸۵٪</label><label><input type="radio" name="m1" value="90">۹۰٪</label></div><div class="actions"><button class="btn primary" data-calc="1">محاسبه</button><button class="btn ghost" data-save="1">📌</button></div><div class="resBox" id="res1"></div></div>
-<div class="card"><h3>💧 ۲) اسپرینکلر</h3><div class="formRow"><div class="field"><label>مساحت</label><input type="number" id="c2Area" value="139"></div><div class="field"><label>خطر</label><select id="c2Haz"><option value="LH">LH</option><option value="OH1" selected>OH1</option><option value="OH2">OH2</option><option value="EH1">EH1</option><option value="EH2">EH2</option></select></div></div><div class="actions"><button class="btn primary" data-calc="2">محاسبه</button><button class="btn ghost" data-save="2">📌</button></div><div class="resBox" id="res2"></div></div>
-<div class="card"><h3>🏢 ۳) دبی کل</h3><div class="formRow"><div class="field"><label>چگالی</label><input type="number" id="c3Den" value="8.1"></div><div class="field"><label>مساحت</label><input type="number" id="c3Area" value="139"></div><div class="field"><label>شلنگ</label><input type="number" id="c3Hose" value="950"></div><div class="field"><label>ناموازنی٪</label><input type="number" id="c3Imb" value="5"></div></div><div class="actions"><button class="btn primary" data-calc="3">محاسبه</button><button class="btn ghost" data-save="3">📌</button></div><div class="resBox" id="res3"></div></div>
-<div class="card"><h3>🎯 ۴) نازل Q=K√P</h3><div class="radioRow"><label><input type="radio" name="c4sys" value="m" checked>متری</label><label><input type="radio" name="c4sys" value="i">امپریال</label></div><div class="formRow"><div class="field"><label>K</label><select id="c4K"></select></div><div class="field hidden" id="c4KcBox"><label>K</label><input type="number" id="c4Kc" value="80"></div><div class="field"><label>P (<span id="c4PU">bar</span>)</label><input type="number" id="c4P" value="1"></div></div><div class="actions"><button class="btn primary" data-calc="4">محاسبه</button><button class="btn ghost" data-save="4">📌</button></div><div class="resBox" id="res4"></div></div>
-<div class="card"><h3>🛢️ ) مخزن</h3><div class="formRow"><div class="field"><label>Q</label><input type="number" id="c5Q" value="1200"></div><div class="field"><label>مدت</label><select id="c5Dur"><option value="30">۳۰</option><option value="60" selected>۶۰</option><option value="90">۹۰</option><option value="120">۱۲۰</option></select></div><div class="field"><label>اطمینان٪</label><input type="number" id="c5Safe" value="10"></div></div><div class="actions"><button class="btn primary" data-calc="5">محاسبه</button><button class="btn ghost" data-save="5">📌</button></div><div class="resBox" id="res5"></div></div>
-<div class="card"><h3>🌊 ۶) Hazen-Williams</h3><div class="formRow"><div class="field"><label>Q</label><input type="number" id="c6Q" value="900"></div><div class="field"><label>جنس</label><select id="c6Sched"><option value="sch40" selected>Sch40</option><option value="sch10">Sch10</option><option value="copper">مسی</option><option value="cpvc">CPVC</option></select></div><div class="field"><label>سایز</label><select id="c6Size"><option value="1">1"</option><option value="1.5">1½"</option><option value="2" selected>2"</option><option value="3">3"</option><option value="4">4"</option><option value="6">6"</option></select></div><div class="field"><label>L</label><input type="number" id="c6L" value="45"></div><div class="field"><label>C</label><select id="c6C"><option value="120" selected>120</option><option value="140">140</option><option value="150">150</option></select></div></div><div class="formRow"><div class="field"><label>زانو</label><input type="number" id="c6Elb" value="6"></div><div class="field"><label>سه‌راهی</label><input type="number" id="c6Tee" value="3"></div><div class="field"><label>یک‌طرفه</label><input type="number" id="c6Chk" value="1"></div><div class="field"><label>کشویی</label><input type="number" id="c6Gate" value="2"></div></div><div class="actions"><button class="btn primary" data-calc="6">محاسبه</button><button class="btn ghost" data-save="6">📌</button></div><div class="resBox" id="res6"></div></div>
-<div class="card"><h3>🚪 ) فشار مثبت</h3><div class="formRow"><div class="field"><label>درب باز</label><input type="number" id="c7Open" value="1"></div><div class="field"><label>ارتفاع</label><input type="number" id="c7H" value="30"></div><div class="field"><label>نشتی٪</label><input type="number" id="c7Leak" value="20"></div><div class="field"><label>درب بسته</label><input type="number" id="c7Closed" value="10"></div><div class="field"><label>ΔP</label><input type="number" id="c7DP" value="50"></div></div><div class="actions"><button class="btn primary" data-calc="7">محاسبه</button><button class="btn ghost" data-save="7">📌</button></div><div class="resBox" id="res7"></div></div>
-<div class="card"><h3>🚿 ۸) سایز لوله</h3><div class="formRow"><div class="field"><label>GPM</label><input type="number" id="c8Gpm" value="250"></div></div><div class="actions"><button class="btn primary" data-calc="8">محاسبه</button><button class="btn ghost" data-save="8">📌</button></div><div class="resBox" id="res8"></div></div>
-<div class="card"><h3>🧯 ۹) خاموش‌کننده</h3><div class="formRow"><div class="field"><label>مساحت</label><input type="number" id="c9Area" value="600"></div><div class="field"><label>خطر</label><select id="c9Haz"><option value="200">کم</option><option value="150" selected>متوسط</option><option value="100">زیاد</option></select></div></div><div class="actions"><button class="btn primary" data-calc="9">محاسبه</button><button class="btn ghost" data-save="9">📌</button></div><div class="resBox" id="res9"></div></div>
-<div class="card"><h3>🏭 ۱۰) موتورخانه دیزل</h3><div class="formRow"><div class="field"><label>توان</label><input type="number" id="c10P" value="500"></div><div class="field"><label>واحد</label><select id="c10Unit"><option value="kW" selected>kW</option><option value="HP">HP</option></select></div><div class="field"><label>خنک‌کاری</label><select id="c10Cool"><option value="rad" selected>رادیاتور</option><option value="hx">مبدل</option></select></div><div class="field"><label>ΔT</label><select id="c10dT"><option value="15" selected>۱۵</option><option value="10">۱۰</option></select></div></div><div class="actions"><button class="btn primary" data-calc="10">محاسبه</button><button class="btn ghost" data-save="10">📌</button></div><div class="resBox" id="res10"></div></div>
-</div></section>
-<section class="sec hidden" id="sec-check"><div class="counters" id="chkCounters"></div><div class="card" style="margin-bottom:16px"><h3>📘 چک‌لیست مقرراتی</h3><div class="actions" style="margin-bottom:10px"><button class="btn ghost" id="btnRegCheckExport">📄 خروجی</button></div><div id="regCheckBox"></div></div><div class="card"><h3>🚒 چک‌لیست عمومی</h3><div id="chkGenBox"></div></div></section>
-<section class="sec hidden" id="sec-ncr"><div class="card" style="margin-bottom:16px"><h3>⚠️ ثبت NCR</h3><div class="formRow"><div class="field"><label>سیستم</label><select id="ncrSystem"><option>اسپرینکلر</option><option>اعلام حریق</option><option>راه خروج</option><option>کنترل دود</option><option>سایر</option></select></div><div class="field"><label>موقعیت</label><input type="text" id="ncrLoc"></div><div class="field"><label>شدت</label><select id="ncrSev"><option value="crit">بحرانی</option><option value="maj" selected>مهم</option><option value="min">جزئی</option></select></div><div class="field"><label>مهلت</label><input type="date" id="ncrDeadline"></div></div><div class="field"><label>شرح</label><textarea id="ncrDesc"></textarea></div><div class="formRow"><div class="field"><label>عکس قبل</label><div class="phBox"><input type="file" id="ncrBeforeCam" accept="image/*" capture="environment" hidden><button class="btn small ghost" onclick="document.getElementById('ncrBeforeCam').click()">📸</button><img id="phBeforePrev" class="hidden" alt=""></div></div><div class="field"><label>عکس بعد</label><div class="phBox"><input type="file" id="ncrAfterCam" accept="image/*" capture="environment" hidden><button class="btn small ghost" onclick="document.getElementById('ncrAfterCam').click()">📸</button><img id="phAfterPrev" class="hidden" alt=""></div></div></div><div class="actions"><button class="btn primary" id="btnNcrAdd">➕ ثبت</button></div></div><div class="card"><h3>📋 لیست NCR</h3><div class="filterRow" id="ncrFilters"><button class="fChip on" data-f="all">همه</button><button class="fChip" data-f="open">باز</button><button class="fChip" data-f="closed">بسته</button></div><div id="ncrList"></div></div></section>
-<section class="sec hidden" id="sec-std"><div class="card" style="margin-bottom:16px"><h3>📚 استانداردها</h3><div class="formRow"><div class="field"><label>جستجو</label><input type="text" id="stdSearch"></div><div class="field"><label>منبع</label><select id="stdSrc"><option value="all">همه</option><option>NFPA 13</option><option>مبحث ۳</option><option>مبحث ۱۴</option></select></div></div></div><div class="grid" id="stdList"></div></section>
-<section class="sec hidden" id="sec-m3"><div class="m3Hero"><div class="big">📚 بانک مبحث سوم (۱۳۹۵)</div></div><div class="m3Grid"><aside><div class="card"><div id="m3Chapters"></div></div></aside><div><div class="card"><div class="m3Search"><input id="m3Search" placeholder="جستجو…"><select id="m3Cat"></select><button class="btn ghost" id="m3Clear">پاک</button></div></div><div id="m3Results" style="margin-top:12px"></div></div></div></section>
-<section class="sec hidden" id="sec-m14"><div class="m3Hero"><div class="big">⚙️ بانک مبحث چهاردهم (۱۳۹۶)</div></div><div class="card" style="margin-bottom:12px"><div class="m3Search"><input id="m14Search" placeholder="جستجو…"><select id="m14Cat"></select><button class="btn ghost" id="m14Clear">پاک</button></div></div><div id="m14Results"></div></section>
-<section class="sec hidden" id="sec-matrix"><div class="m3Hero"><div class="big">🧩 ماتریس تطبیق مقررات</div></div><div id="matrixTopics" style="margin-bottom:12px"></div><div id="matrixResults"></div></section>
-<section class="sec hidden" id="sec-ruleengine"><div id="ruleSummary" class="ruleGrid"></div><div class="card" style="margin-top:12px"><h3>📌 الزامات فعال</h3><div id="ruleList" class="list"></div></div><div class="card" style="margin-top:12px"><h3>🔍 کنترل طبقات</h3><div id="ruleQC" class="list"></div></div></section>
-<section class="sec hidden" id="sec-floors"><div class="card"><h3>➕ بازه طبقات</h3><div class="floorGrid"><div class="field"><label>از</label><input id="flFrom" type="number" value="1"></div><div class="field"><label>تا</label><input id="flTo" type="number" value="1"></div><div class="field"><label>مساحت</label><input id="flArea" type="number" value="0"></div><div class="field"><label>تصرف‌ها</label><div id="flOccs"></div></div></div><div class="actions"><button class="btn primary" id="btnFloorAdd">➕</button></div></div><div class="card" style="margin-top:12px"><div id="floorRows"></div></div></section>
-<section class="sec hidden" id="sec-report"><div class="card"><h3>📄 گزارش</h3><div class="formRow"><div class="field"><label>آدرس</label><input type="text" id="rAddress"></div><div class="field"><label>تاریخ</label><input type="date" id="rDate"></div><div class="field"><label>بازرس</label><input type="text" id="rInspector"></div></div><div class="formRow"><div class="field"><label>کارفرما</label><input type="text" id="rClient"></div><div class="field"><label>شماره گزارش</label><input type="text" id="rReportNo"></div><div class="field"><label>نتیجه</label><select id="rResult"><option value="">انتخاب</option><option>مورد تأیید</option><option>تأیید مشروط</option><option>نیازمند اصلاح</option></select></div></div><div class="field"><label>یادداشت</label><textarea id="rNote"></textarea></div><div class="actions"><button class="btn primary" id="btnPrint">🖨 چاپ</button><button class="btn ghost" id="btnBackup">💾 پشتیبان</button><input type="file" id="btnRestoreFile" accept="application/json" hidden><button class="btn ghost" onclick="document.getElementById('btnRestoreFile').click()">⬆ بازیابی</button></div></div><div class="card" style="margin-top:16px"><h3>📱 PWA</h3><div class="sub">وضعیت SW: <b id="pwaStatus">بررسی...</b></div><div class="actions"><button class="btn primary hidden" id="btnPwaInstall">⬇ نصب</button></div></div></section>
-<section class="sec hidden" id="sec-map3d"><div class="card"><h2>🧊 مدل سه‌بعدی</h2><div class="row" style="margin:10px 0"><label>طبقات <input id="m3Floors" type="number" value="10" style="width:80px"></label><button id="m3Reset" class="btn ghost small">بازنشانی</button></div><div id="m3Viewport" style="height:520px;position:relative;overflow:hidden;border-radius:14px;background:#10151c"></div></div></section>
-</main>
-<footer>دستیار اجرایی آتش‌نشانی · منابع: مبحث ۳ (۱۳۹۵) + مبحث ۱۴ (۱۳۹۶) · آماده GitHub Pages و PWA</footer>
-<div class="modal hidden" id="modal"><button id="modalClose">✕</button><img id="modalImg" alt=""><div class="cap" id="modalCap" style="color:#fff"></div></div>
-<div id="toasts"></div>
-<div id="printArea"></div>
-<script>
-/* ===== ابزارها ===== */
-const $=id=>document.getElementById(id);
-const faN=n=>Number(n).toLocaleString('fa-IR');
-const fmt=(n,d=1)=>Number(n).toLocaleString('fa-IR',{maximumFractionDigits:d});
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
-const todayStr=()=>{const t=new Date();return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');};
-const faDate=v=>{try{return new Date(v+'T12:00:00').toLocaleDateString('fa-IR');}catch(e){return v;}};
-const faTime=ts=>new Date(ts).toLocaleString('fa-IR',{dateStyle:'medium',timeStyle:'short'});
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function toast(msg,type){const t=document.createElement('div');t.className='toast'+(type==='err'?' err':'');t.innerHTML=msg;$('toasts').appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),350);},3000);}
-function dlText(txt,name,mime){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:mime||'text/plain'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000);}
-/* ===== IndexedDB ===== */
-let idb=null;
-function initIDB(){return new Promise(res=>{try{const r=indexedDB.open('fireExecDB',2);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains('kv'))db.createObjectStore('kv');if(!db.objectStoreNames.contains('photos'))db.createObjectStore('photos');};r.onsuccess=e=>{idb=e.target.result;res(true);};r.onerror=()=>res(false);}catch(e){res(false);}});}
-function idbPut(s,k,v){return new Promise(res=>{if(!idb)return res(false);try{const tx=idb.transaction(s,'readwrite');tx.objectStore(s).put(v,k);tx.oncomplete=()=>res(true);tx.onerror=()=>res(false);}catch(e){res(false);}});}
-function idbGet(s,k){return new Promise(res=>{if(!idb)return res(null);try{const rq=idb.transaction(s,'readonly').objectStore(s).get(k);rq.onsuccess=()=>res(rq.result===undefined?null:rq.result);rq.onerror=()=>res(null);}catch(e){res(null);}});}
-function idbPhotosAll(){return new Promise(res=>{if(!idb)return res([]);try{const out=[];const cur=idb.transaction('photos','readonly').objectStore('photos').openCursor();cur.onsuccess=e=>{const c=e.target.result;if(c){out.push({id:c.key,data:c.value});c.continue();}else res(out);};cur.onerror=()=>res([]);}catch(e){res([]);}});}
-/* ===== داده ===== */
-const LS='fireExecState_v2';
-let S=null,ncrFilter='all',deferredPrompt=null;
-const pendingPhotos={before:null,after:null};
-const lastRes={};
-function defaultProjectData(){return{meta:{buildingTypes:['parking'],address:'',date:todayStr(),inspector:'',note:'',floors:[],smokeScenarios:[]},calcs:[],checks:{},ncrs:[],ncrSeq:1,audit:{last:null},regChecks:{},parkingZones:[],parkingFans:[]};}
-const D=()=>S.data[S.activeId];
-function getBuildingTypes(){const m=D().meta||{};let a=Array.isArray(m.buildingTypes)?m.buildingTypes.slice():[];if(!a.length&&m.buildingType)a=[m.buildingType];a=a.filter(x=>TYPES.some(t=>t[0]===x));return a.length?a:['parking'];}
-function buildingTypeLabels(){return getBuildingTypes().map(k=>(TYPES.find(t=>t[0]===k)||['','—'])[1]);}
-function saveAll(){try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){toast('⚠️ خطا در ذخیره‌سازی','err');}idbPut('kv','state',JSON.parse(JSON.stringify(S)));}
-/* ===== ثابت‌ها ===== */
-const TYPES=[['parking','🚗 پارکینگ'],['highrise','🏢 بلندمرتبه'],['warehouse','📦 انبار'],['hospital','🏥 بیمارستان'],['commercial','🛍️ تجاری'],['residential','🏠 مسکونی'],['industrial','🏭 صنعتی']];
-const HAZ={LH:{den:4.1,hose:0},OH1:{den:6.1,hose:950},OH2:{den:8.1,hose:950},EH1:{den:12.2,hose:1900},EH2:{den:16.3,hose:1900}};
-const K_METRIC=[['80','K=80'],['115','K=115'],['160','K=160'],['200','K=200'],['c','سفارشی']];
-const K_IMP=[['5.6','K=5.6'],['8.0','K=8.0'],['11.2','K=11.2'],['14.0','K=14.0'],['c','سفارشی']];
-const PIPE_SIZES=[['100','1"'],['290','1½"'],['590','2"'],['900','2½"'],['1590','3"'],['3000','4"'],['6500','6"'],['99999','8"']];
-const SCHEDULES={sch40:{label:'Sch40',ids:{'1':26.6,'1.5':40.9,'2':52.5,'3':77.9,'4':102.3,'6':154.1}},sch10:{label:'Sch10',ids:{'1':27.9,'1.5':42.7,'2':54.7,'3':82.8,'4':108.2,'6':161.5}},copper:{label:'مسی',ids:{'1':27.3,'1.5':41.6,'2':52.5,'3':77.9,'4':102.3,'6':154.1}},cpvc:{label:'CPVC',ids:{'1':26.6,'1.5':40.9,'2':52.5,'3':77.9,'4':102.3,'6':154.1}}};
-const NOMS=['1','1.5','2','3','4','6'];
-const EQ_FT={elb:[3,5,7,10,13,17],tee:[6,9,12,20,27,35],chk:[6,11,13,20,27,40],gate:[1,1,2,3,4,5]};
-const TYPE_CHECKLISTS={parking:['تخلیه دود/جت‌فن فعال','سنسور CO کالیبره','۶ تعویض هوا برقرار','اسپرینکلر کامل','درب ضدحریق به ساختمان'],highrise:['فن فشار مثبت راه‌پله','آسانسور آتش‌نشان','رایزر تر/خشک','درب‌های ضدحریق خودبند'],warehouse:['هد ESFR سالم','فاصله آزاد زیر هد','خاموش‌کننده متناسب'],hospital:['زون‌بندی دود','کریدور تخلیه ≥۲٫۴m','کپسول Clean Agent در OR'],commercial:['کنترل دود آتریوم','هود آشپزخانه سرویس‌شده','خروج‌ها متناسب با بار'],residential:['راه‌پله بدون مانع','کپسول و جعبه F هر طبقه','دتکتور دود واحدها'],industrial:['مجوز کار گرم','تهویه مطابق مبحث ۱۴','قطع اضطراری ESD']};
-const GEN_CHECKLIST=[{g:'💧 منبع آب',items:['مخزن بدون نشتی','پمپ‌ها اتوماتیک','FDC در دسترس']},{g:'🚿 اسپرینکلر',items:['شیرهای زون باز','هد سالم','تست انتهای خط']},{g:'🚨 اعلام حریق',items:['پنل بدون خطا','دتکتورها فعال','شاسی‌ها در دسترس']},{g:'🚪 خروج',items:['درب‌ها خودبند','روشنایی اضطراری','مسیر بدون مانع']},{g:'🧯 خاموش‌کننده',items:['کپسول‌ها شارژ','دسترسی بدون مانع']}];
-const STANDARDS=[{src:'NFPA 13',t:'حداقل فشار هد ۰٫۵ بار',b:'دورترین هد حداقل 0.5 bar.'},{src:'NFPA 13',t:'چگادی/مساحت',b:'LH 4.1، OH1 6.1، OH2 8.1 روی 139 m².'},{src:'NFPA 92',t:'فشار مثبت ۲۵–۵۰ Pa',b:'سرعت درب باز ≥0.75 m/s.'},{src:'NFPA 10',t:'پوشش کپسول',b:'کم‌خطر ۲۰ / متوسط ۱۵۰ / زیاد ۱۰۰ m².'},{src:'مبحث ۳',t:'تهویه پارکینگ ۶ ACH',b:'+ کنترل CO.'},{src:'مبحث ۳',t:'درب ضدحریق راه‌پله',b:'مقاومت ≥۲ ساعت.'},{src:'مبحث ۱۴',t:'تهویه موتورخانه',b:'هوای احتراق + دفع حرارت.'}];
-const CODE_MATRIX=[{topic:'فشار مثبت راه‌پله',src:'مبحث ۳',status:'source',ref:'3-9-5',text:'حفاظت دود با لابی/بالکن/فشار مثبت.'},{topic:'اسپرینکلر',src:'مبحث ۳',status:'source',ref:'3-9-4',text:'طراحی بر اساس NFPA 13.'},{topic:'تهویه پارکینگ',src:'مبحث ۳+۱۴',status:'review',ref:'3-11-3 / فصل۴',text:'کنترل مشترک حریق و تأسیسات.'},{topic:'آسانسور آتش‌نشانی',src:'مبحث ۳',status:'source',ref:'3-10-6',text:'ارتفاع >40m دو آسانسور.'}];
-const REG_CHECKS=[{id:'m3-exit',title:'راه‌های خروج بررسی شود',src:'مبحث ۳',ref:'فصل 3-6',when:d=>true},{id:'m3-sep',title:'جداکننده‌های آتش کنترل شود',src:'مبحث ۳',ref:'3-8-7-3',when:d=>true},{id:'m3-parking',title:'ضوابط پارکینگ بررسی شود',src:'مبحث ۳',ref:'3-11-3',when:d=>getBuildingTypes().includes('parking')},{id:'m3-high',title:'ضوابط بلندمرتبه بررسی شود',src:'مبحث ۳',ref:'فصل 3-10',when:d=>getBuildingTypes().includes('highrise')},{id:'m14-vent',title:'تهویه پارکینگ/CO بررسی شود',src:'مبحث ۱۴',ref:'فصل ۴',when:d=>getBuildingTypes().includes('parking')},{id:'m14-eng',title:'تهویه موتورخانه کنترل شود',src:'مبحث ۱۴',ref:'فصل مرتبط',when:d=>true}];
-const OCC_TYPES=[['parking','پارکینگ'],['highrise','بلندمرتبه'],['commercial','تجاری'],['residential','مسکونی'],['hospital','بیمارستان'],['warehouse','انبار'],['industrial','صنعتی']];
-/* ===== رندر ===== */
-function getFloors(){const d=D();d.meta=d.meta||{};if(!Array.isArray(d.meta.floors))d.meta.floors=[];return d.meta.floors;}
-function renderTabs(){
-const defs=[['dash','📊 داشبورد'],['calcs','🧮 محاسبات'],['check','✅ چک‌لیست'],['ncr','⚠️ NCR'],['std','📚 استانداردها'],['m3','📘 مبحث ۳'],['m14','⚙️ مبحث ۱۴'],['matrix','🧩 ماتریس'],['ruleengine','🧠 الزامات'],['floors','🏢 طبقات'],['map3d','🧊 3D'],['report','📄 گزارش']];
-$('tabs').innerHTML=defs.map(d=>'<button class="tabBtn" data-tab="'+d[0]+'">'+d[1]+'</button>').join('');
-document.querySelectorAll('.tabBtn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabBtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.sec').forEach(s=>s.classList.add('hidden'));$('sec-'+b.dataset.tab).classList.remove('hidden');if(b.dataset.tab==='map3d'&&window.init3DSystemModel)window.init3DSystemModel();});
-$('tabs').querySelector('[data-tab="dash"]').classList.add('on');
-}
-function renderHeader(){$('projSel').innerHTML=S.projects.map(p=>'<option value="'+p.id+'" '+(p.id===S.activeId?'selected':'')+'>'+esc(p.name)+'</option>').join('');$('btnTheme').textContent=S.theme==='dark'?'☀️':'🌙';}
-function renderTypeBar(){const sel=new Set(getBuildingTypes());$('typeBar').innerHTML=TYPES.map(t=>'<button class="typeChip '+(sel.has(t[0])?'on':'')+'" data-t="'+t[0]+'">'+t[1]+'</button>').join('');document.querySelectorAll('.typeChip').forEach(c=>c.onclick=()=>{const arr=getBuildingTypes(),k=c.dataset.t,i=arr.indexOf(k);if(i>=0){if(arr.length===1)return;arr.splice(i,1);}else arr.push(k);D().meta.buildingTypes=arr;saveAll();renderTypeBar();renderChecklist();renderDash();};);}
-function allCheckItems(){const arr=[];getBuildingTypes().forEach(bt=>(TYPE_CHECKLISTS[bt]||[]).forEach((t,i)=>arr.push({id:'t_'+bt+'_'+i,t})));GEN_CHECKLIST.forEach((g,gi)=>g.items.forEach((it,ii)=>arr.push({id:'g_'+gi+'_'+ii,t:it})));return arr;}
-function renderDash(){const d=D(),items=allCheckItems();let ok=0;items.forEach(it=>{if(d.checks[it.id]&&d.checks[it.id].s===1)ok++;});const pct=items.length?Math.round(ok/items.length*100):0;const open=d.ncrs.filter(n=>n.status==='open').length;
-$('dashStats').innerHTML='<div class="card"><h3>📈 پیشرفت چک‌لیست</h3><div class="num">'+fmt(pct,0)+'٪</div><div class="bar"><i style="width:'+pct+'%"></i></div></div><div class="card"><h3>⚠️ NCR باز</h3><div class="num">'+faN(open)+'</div></div><div class="card"><h3>🧮 محاسبات</h3><div class="num">'+faN(d.calcs.length)+'</div></div>';
-$('dashDead').innerHTML=d.ncrs.filter(n=>n.status!=='closed'&&n.deadline).slice(0,5).map(n=>'<div class="listItem"><b>'+esc(n.code)+'</b> · '+esc(n.system)+' · '+faDate(n.deadline)+'</div>').join('')||'<div class="sub">موردی نیست ✅</div>';
-$('dashCalcs').innerHTML=d.calcs.length?d.calcs.map(c=>'<div class="listItem"><b>'+esc(c.title)+'</b><table style="width:100%;font-size:12px">'+c.lines.map(l=>'<tr><td>'+esc(l[0])+'</td><td>'+esc(l[1])+'</td></tr>').join('')+'</table></div>').join(''):'<div class="sub">محاسبه‌ای ثبت نشده.</div>';}
-function renderChecklist(){const d=D();let ok=0,no=0;allCheckItems().forEach(it=>{const st=d.checks[it.id];if(st&&st.s===1)ok++;if(st&&st.s===2)no++;});$('chkCounters').innerHTML='<span class="counter">✔ '+faN(ok)+'</span><span class="counter">✖ '+faN(no)+'</span>';
-$('regCheckBox').innerHTML=REG_CHECKS.filter(r=>r.when(d)).map(r=>{const st=d.regChecks[r.id]||{s:0};return '<div class="chkRow st'+st.s+'"><div><b>'+esc(r.title)+'</b><small>'+esc(r.src)+' · '+esc(r.ref)+'</small></div><button class="chkBtn" data-reg="'+r.id+'">'+['⏳','✅','❌'][st.s]+'</button></div>';}).join('');
-document.querySelectorAll('[data-reg]').forEach(b=>b.onclick=()=>{const id=b.dataset.reg;const cur=d.regChecks[id]||{s:0};d.regChecks[id]={s:(cur.s+1)%3};saveAll();renderChecklist();});
-$('chkGenBox').innerHTML=GEN_CHECKLIST.map((g,gi)=>'<h3>'+g.g+'</h3>'+g.items.map((it,ii)=>{const id='g_'+gi+'_'+ii;const st=d.checks[id]||{s:0};return '<div class="chkRow st'+st.s+'"><div>'+esc(it)+'</div><button class="chkBtn" data-chk="'+id+'">'+['⏳','✅','❌'][st.s]+'</button></div>';}).join('')).join('');
-document.querySelectorAll('[data-chk]').forEach(b=>b.onclick=()=>{const id=b.dataset.chk;const cur=d.checks[id]||{s:0};d.checks[id]={s:(cur.s+1)%3,ts:Date.now()};saveAll();renderChecklist();renderDash();});}
-function renderNcr(){const d=D();let list=d.ncrs.slice().reverse();if(ncrFilter==='open')list=list.filter(n=>n.status==='open');if(ncrFilter==='closed')list=list.filter(n=>n.status==='closed');
-$('ncrList').innerHTML=list.length?list.map(n=>'<div class="ncrCard"><div class="ncrHead"><b>'+esc(n.code)+'</b><span>'+esc(n.system)+'</span><span>'+(n.status==='closed'?'بسته':'باز')+'</span></div><div>'+esc(n.desc)+'</div>'+((n.beforeId||n.afterId)?'<div class="ncrImgs">'+(n.beforeId?'<img data-phid="'+n.beforeId+'">':'')+(n.afterId?'<img data-phid="'+n.afterId+'">':'')+'</div>':'')+'</div>').join(''):'<div class="sub">موردی نیست.</div>';
-document.querySelectorAll('.ncrImg[data-phid]').forEach(el=>{idbGet('photos',el.dataset.phid).then(src=>{if(src)el.src=src;});});}
-function renderStd(){const q=($('stdSearch').value||'').trim(),src=$('stdSrc').value;const list=STANDARDS.filter(s=>(src==='all'||s.src===src)&&(!q||(s.t+s.b).includes(q)));$('stdList').innerHTML=list.map(s=>'<div class="stdCard"><span class="m3Tag">'+esc(s.src)+'</span><h4>'+esc(s.t)+'</h4><p>'+esc(s.b)+'</p></div>').join('');}
-/* ===== بانک‌ها ===== */
-const M3=[{ch:'3-1',title:'تعاریف راه خروج',ref:'3-1-1',text:'راه خروج: دسترس خروج + خروج + تخلیه خروج.'},{ch:'3-8',title:'مقاومت دیوار جداکننده',ref:'3-8-7-3',text:'حداقل یک ساعت.'},{ch:'3-9',title:'اطفاء و کنترل دود',ref:'3-9',text:'خاموش‌کننده، اسپرینکلر، فشار مثبت.'},{ch:'3-10',title:'بلندمرتبه',ref:'3-10',text:'الزامات اختصاصی.'},{ch:'3-11',title:'پارکینگ',ref:'3-11-3',text:'ضوابط اختصاصی پارکینگ.'}];
-const M14=[{ch:'فصل ۳',title:'تأمین هوا و دما',text:'الزامات هوای احتراق.'},{ch:'فصل ۴',title:'تهویه پارکینگ و CO',text:'بازنگری مقادیر تهویه.'},{ch:'فصل ۶',title:'کانال و آشکارساز دود',text:'الزامات کانال.'}];
-function renderM3(){const q=($('m3Search').value||'').trim();const list=M3.filter(x=>!q||(x.title+x.text).includes(q));$('m3Results').innerHTML=list.map(x=>'<div class="m3Ref"><h4>'+esc(x.title)+'</h4><div class="m3Meta"><span class="m3Tag">'+esc(x.ref)+'</span></div><div class="m3Text">'+esc(x.text)+'</div></div>').join('');}
-function renderM14(){const q=($('m14Search').value||'').trim();const list=M14.filter(x=>!q||(x.title+x.text).includes(q));$('m14Results').innerHTML=list.map(x=>'<div class="m3Ref"><h4>'+esc(x.title)+'</h4><div class="m3Text">'+esc(x.text)+'</div></div>').join('');}
-function renderMatrix(){$('matrixTopics').innerHTML=CODE_MATRIX.map(x=>'<span class="m3Tag">'+esc(x.topic)+'</span> ').join('');$('matrixResults').innerHTML=CODE_MATRIX.map(x=>'<div class="m3Ref"><div style="display:flex;justify-content:space-between"><h4>'+esc(x.topic)+'</h4><span class="codeStatus '+x.status+'">'+(x.status==='source'?'منبع موجود':'نیازمند تطبیق')+'</span></div><div class="m3Meta"><span class="m3Tag">'+esc(x.src)+'</span><span class="m3Tag">'+esc(x.ref)+'</span></div><div class="m3Text">'+esc(x.text)+'</div></div>').join('');}
-function renderRuleEngine(){const d=D();const types=getBuildingTypes();const rules=[{t:'تهویه پارکینگ',on:types.includes('parking')},{t:'اسپرینکلر',on:true},{t:'فشار مثبت',on:types.includes('highrise')},{t:'راه خروج',on:true}];const act=rules.filter(r=>r.on);$('ruleSummary').innerHTML='<div class="card"><b>'+faN(act.length)+'</b> موضوع فعال</div><div class="card"><b>'+faN(getFloors().length)+'</b> بازه طبقه</div><div class="card">'+esc(buildingTypeLabels().join(' + '))+'</div>';$('ruleList').innerHTML=act.map(r=>'<div class="ruleItem"><b>'+esc(r.t)+'</b></div>').join('');$('ruleQC').innerHTML=getFloors().length?'<div class="ruleItem">ساختار طبقات تعریف شده.</div>':'<div class="ruleItem">🟡 طبقات تعریف نشده.</div>';}
-function renderFloors(){$('floorRows').innerHTML=getFloors().length?'<table class="floorTable"><tr><th>بازه</th><th>تصرف</th></tr>'+getFloors().map(x=>'<tr><td>'+faN(x.from)+' تا '+faN(x.to)+'</td><td>'+esc((x.occ||[]).join('، '))+'</td></tr>').join('')+'</table>':'<div class="sub">بازه‌ای نیست.</div>';}
-/* ===== محاسبات ===== */
-function showRes(n,lines,big){const b=$('res'+n);b.innerHTML=(big?'<div class="big">'+big+'</div>':'')+'<table>'+lines.map(l=>'<tr><td>'+l[0]+'</td><td>'+l[1]+'</td></tr>').join('')+'</table>';b.classList.add('show');}
-function runCalc(n){const v=id=>parseFloat($(id).value)||0;
-if(n===1){const V=v('c1L')*v('c1W')*v('c1H'),qA=V*v('c1ACH'),qC=v('c1Car')*920,q=Math.max(qA,qC),mk=q*(parseFloat(document.querySelector('input[name=m1]:checked').value)/100);lastRes[1]={title:'تهویه پارکینگ',lines:[['حجم',fmt(V,0)],['دبی',fmt(q,0)],['جبرانی',fmt(mk,0)]]};showRes(1,lastRes[1].lines,fmt(q,0)+' m³/h');}
-if(n===2){const hz=$('c2Haz').value,q=HAZ[hz].den*v('c2Area')+HAZ[hz].hose;lastRes[2]={title:'اسپرینکلر',lines:[['دبی کل',fmt(q,0)]]};showRes(2,lastRes[2].lines,fmt(q,0)+' L/min');}
-if(n===3){const q=v('c3Den')*v('c3Area')*(1+v('c3Imb')/100)+v('c3Hose');lastRes[3]={title:'دبی کل',lines:[['دبی',fmt(q,0)]]};showRes(3,lastRes[3].lines,fmt(q,0)+' L/min');}
-if(n===4){const sys=document.querySelector('input[name=c4sys]:checked').value;const K=$('c4K').value==='c'?v('c4Kc'):parseFloat($('c4K').value);const Q=K*Math.sqrt(Math.max(v('c4P'),0));lastRes[4]={title:'نازل',lines:[['دبی',fmt(Q,1)]]};showRes(4,lastRes[4].lines,fmt(Q,1));}
-if(n===5){const vol=v('c5Q')*v('c5Dur')*(1+v('c5Safe')/100)/1000;lastRes[5]={title:'مخزن',lines:[['حجم',fmt(vol,1)]]};showRes(5,lastRes[5].lines,fmt(vol,1)+' m³');}
-if(n===6){const sk=$('c6Sched').value,sc=SCHEDULES[sk],nom=$('c6Size').value,d=sc.ids[nom]||52.5,i=NOMS.indexOf(nom);const Q=v('c6Q'),L=v('c6L'),C=v('c6C');const elM=(EQ_FT.elb[i]*v('c6Elb')+EQ_FT.tee[i]*v('c6Tee')+EQ_FT.chk[i]*v('c6Chk')+EQ_FT.gate[i]*v('c6Gate'))*0.3048;const p=6.05e5*Math.pow(Q,1.85)/(Math.pow(C,1.85)*Math.pow(d,4.87))*(L+elM);lastRes[6]={title:'افت فشار',lines:[['افت',fmt(p,2)]]};showRes(6,lastRes[6].lines,fmt(p,2)+' bar');}
-if(n===7){const tot=(v('c7Open')*0.65*2*Math.sqrt(2*v('c7DP')/1.2)*3600)*1.15;lastRes[7]={title:'فشار مثبت',lines:[['دبی فن',fmt(tot,0)]]};showRes(7,lastRes[7].lines,fmt(tot,0)+' m³/h');}
-if(n===8){const sz=PIPE_SIZES.find(s=>v('c8Gpm')<=parseFloat(s[0]))||PIPE_SIZES[7];lastRes[8]={title:'سایز لوله',lines:[['سایز',sz[1]]]};showRes(8,lastRes[8].lines,sz[1]);}
-if(n===9){const c=Math.max(1,Math.ceil(v('c9Area')/v('c9Haz')));lastRes[9]={title:'خاموش‌کننده',lines:[['تعداد',faN(c)]]};showRes(9,lastRes[9].lines,faN(c)+' کپسول');}
-if(n===10){let P=v('c10P');if($('c10Unit').value==='HP')P*=0.746;const Qc=P*2.4,Qcool=2985*(0.35*P)/v('c10dT'),t=(Qc+Qcool)*1.1;lastRes[10]={title:'موتورخانه',lines:[['دبی کل',fmt(t,0)]]};showRes(10,lastRes[10].lines,fmt(t,0)+' m³/h');}}
-function saveCalc(n){if(!lastRes[n]){toast('⚠️ ابتدا محاسبه کنید','err');return;}D().calcs.push({id:uid(),ts:Date.now(),title:lastRes[n].title,lines:lastRes[n].lines});saveAll();renderDash();toast('📌 ثبت شد');}
-/* ===== گزارش ===== */
-async function collectPhotoMap(){const ids=[];D().ncrs.forEach(n=>{if(n.beforeId)ids.push(n.beforeId);if(n.afterId)ids.push(n.afterId);});const m={};for(const id of ids){m[id]=await idbGet('photos',id);}return m;}
-function buildReportHTML(map){const d=D(),m=d.meta||{};const bt=buildingTypeLabels().join(' + ');const status=m.result||(d.ncrs.length?'تأیید مشروط':'مورد تأیید');
-let h='<style>body{font-family:Tahoma;direction:rtl;font-size:12px}.tbl{width:100%;border-collapse:collapse}.tbl td,.tbl th{border:1px solid #999;padding:6px}</style><div style="max-width:800px;margin:auto"><h1 style="text-align:center">گزارش بازدید ایمنی حریق</h1><table class="tbl"><tr><td>پروژه</td><td>'+esc((S.projects.find(p=>p.id===S.activeId)||{}).name)+'</td><td>تاریخ</td><td>'+esc(m.date?faDate(m.date):'')+'</td></tr><tr><td>کارفرما</td><td>'+esc(m.client||'')+'</td><td>بازرس</td><td>'+esc(m.inspector||'')+'</td></tr><tr><td>نوع</td><td>'+esc(bt)+'</td><td>نتیجه</td><td><b>'+esc(status)+'</b></td></tr></table><h3>عدم انطباق‌ها</h3>'+d.ncrs.map((n,i)=>'<div style="border:1px solid #999;padding:8px;margin:6px 0"><b>'+(i+1)+'. '+esc(n.code)+'</b> '+esc(n.system)+'<br>'+esc(n.desc)+(n.beforeId&&map[n.beforeId]?'<br><img src="'+map[n.beforeId]+'" style="max-width:200px">':'')+'</div>').join('')+'<h3>محاسبات</h3>'+d.calcs.map(c=>'<div style="border:1px solid #999;padding:8px;margin:6px 0"><b>'+esc(c.title)+'</b><table class="tbl">'+c.lines.map(l=>'<tr><td>'+esc(l[0])+'</td><td>'+esc(l[1])+'</td></tr>').join('')+'</table></div>').join('')+'<h3>یادداشت</h3><p>'+esc(m.note||'')+'</p><div style="display:flex;gap:40px;margin-top:60px"><div style="flex:1;border-top:1px dashed #999;padding-top:8px">امضا بازرس</div><div style="flex:1;border-top:1px dashed #999;padding-top:8px">امضا کارفرما</div></div></div>';return h;}
-async function doPrint(){const map=await collectPhotoMap();$('printArea').innerHTML=buildReportHTML(map);window.print();}
-/* ===== 3D ===== */
-let M3D=null;
-function init3D(){if(!window.THREE)return;if(M3D)return;const e=$('m3Viewport');M3D={scene:new THREE.Scene(),camera:new THREE.PerspectiveCamera(45,1,.1,1000),renderer:new THREE.WebGLRenderer({antialias:true})};M3D.scene.background=new THREE.Color(0x10151c);e.innerHTML='';e.appendChild(M3D.renderer.domElement);M3D.scene.add(new THREE.AmbientLight(0xffffff,.7));const l=new THREE.DirectionalLight(0xffffff,1);l.position.set(8,14,10);M3D.scene.add(l);M3D.scene.add(new THREE.GridHelper(30,30,0x44505d,0x28313a));const g=new THREE.Group();for(let i=0;i<10;i++){const b=new THREE.Mesh(new THREE.BoxGeometry(12,.1,8),new THREE.MeshStandardMaterial({color:0x9aa5b1,transparent:true,opacity:.4}));b.position.y=i*3.2;g.add(b);}M3D.scene.add(g);resize3D();(function anim(){requestAnimationFrame(anim);g.rotation.y+=.002;M3D.renderer.render(M3D.scene,M3D.camera);})();}
-function resize3D(){if(!M3D)return;const e=$('m3Viewport');const w=e.clientWidth,h=e.clientHeight;M3D.renderer.setSize(w,h,false);M3D.camera.aspect=w/h;M3D.camera.updateProjectionMatrix();M3D.camera.position.set(20,18,20);M3D.camera.lookAt(0,14,0);}
-window.init3DSystemModel=init3D;
-/* ===== راه‌اندازی ===== */
-function refreshAllUI(){document.documentElement.setAttribute('data-theme',S.theme||'light');renderHeader();renderTabs();renderTypeBar();renderDash();renderChecklist();renderNcr();renderStd();renderM3();renderM14();renderMatrix();renderRuleEngine();renderFloors();bindReportInputs();}
-function bindReportInputs(){const m=D().meta;$('rAddress').value=m.address||'';$('rDate').value=m.date||todayStr();$('rInspector').value=m.inspector||'';$('rClient').value=m.client||'';$('rReportNo').value=m.reportNo||'';$('rResult').value=m.result||'';$('rNote').value=m.note||'';const up=()=>{m.address=$('rAddress').value;m.date=$('rDate').value;m.inspector=$('rInspector').value;m.client=$('rClient').value;m.reportNo=$('rReportNo').value;m.result=$('rResult').value;m.note=$('rNote').value;saveAll();};['rAddress','rDate','rInspector','rClient','rReportNo','rResult','rNote'].forEach(id=>{$(id).oninput=up;});}
-window.addEventListener('DOMContentLoaded',async()=>{
-await initIDB();
-let local=null;try{local=JSON.parse(localStorage.getItem(LS));}catch(e){}
-if(!local)local=await idbGet('kv','state');
-if(!local||!local.projects||!local.projects.length){const id='p_def';S={theme:'light',activeId:id,projects:[{id,name:'پروژه نمونه'}],data:{[id]:defaultProjectData()}};}else S=local;
-saveAll();
-$('projSel').onchange=e=>{S.activeId=e.target.value;saveAll();refreshAllUI();};
-$('btnProjNew').onclick=()=>{const n=prompt('نام پروژه:');if(!n)return;const id='p_'+uid();S.projects.push({id,name:n});S.data[id]=defaultProjectData();S.activeId=id;saveAll();refreshAllUI();};
-$('btnProjDel').onclick=()=>{if(S.projects.length<=1)return;if(confirm('حذف؟')){S.projects=S.projects.filter(p=>p.id!==S.activeId);delete S.data[S.activeId];S.activeId=S.projects[0].id;saveAll();refreshAllUI();}};
-$('btnTheme').onclick=()=>{S.theme=S.theme==='dark'?'light':'dark';saveAll();refreshAllUI();};
-document.querySelectorAll('button[data-calc]').forEach(b=>b.onclick=()=>runCalc(+b.dataset.calc));
-document.querySelectorAll('button[data-save]').forEach(b=>b.onclick=()=>saveCalc(+b.dataset.save));
-$('c4K').innerHTML=K_METRIC.map(k=>'<option value="'+k[0]+'">'+k[1]+'</option>').join('');
-$('c4K').onchange=e=>$('c4KcBox').classList.toggle('hidden',e.target.value!=='c');
-$('btnNcrAdd').onclick=async()=>{const desc=$('ncrDesc').value.trim();if(!desc)return toast('⚠️ شرح لازم است','err');D().ncrs.push({id:uid(),code:'NCR-'+String(D().ncrSeq++).padStart(3,'0'),ts:Date.now(),system:$('ncrSystem').value,loc:$('ncrLoc').value,sev:$('ncrSev').value,deadline:$('ncrDeadline').value,desc,status:'open',beforeId:pendingPhotos.before,afterId:pendingPhotos.after});pendingPhotos.before=null;saveAll();renderNcr();renderDash();toast('➕ ثبت شد');};
-['Before'].forEach(C=>{$('ncr'+C+'Cam').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const img=new Image(),u=URL.createObjectURL(f);img.onload=()=>{const c=document.createElement('canvas');const r=Math.min(1,900/Math.max(img.width,img.height));c.width=img.width*r;c.height=img.height*r;c.getContext('2d').drawImage(img,0,0,c.width,c.height);const pid='ph_'+uid();idbPut('photos',pid,c.toDataURL('image/jpeg',.72));pendingPhotos.before=pid;$('phBeforePrev').src=c.toDataURL();$('phBeforePrev').classList.remove('hidden');};img.src=u;});});
-document.querySelectorAll('#ncrFilters .fChip').forEach(c=>c.onclick=()=>{document.querySelectorAll('#ncrFilters .fChip').forEach(x=>x.classList.remove('on'));c.classList.add('on');ncrFilter=c.dataset.f;renderNcr();});
-$('stdSearch').oninput=renderStd;$('stdSrc').onchange=renderStd;
-$('m3Search').oninput=renderM3;$('m14Search').oninput=renderM14;
-$('btnFloorAdd').onclick=()=>{const occ=[...$('flOccs').querySelectorAll('.occChip.on')].map(x=>x.dataset.occ);getFloors().push({from:+$('flFrom').value,to:+$('flTo').value,area:+$('flArea').value,occ});saveAll();renderFloors();renderRuleEngine();};
-$('flOccs').innerHTML=OCC_TYPES.map(x=>'<span class="occChip" data-occ="'+x[1]+'">'+x[1]+'</span>').join('');
-document.querySelectorAll('.occChip').forEach(c=>c.onclick=()=>c.classList.toggle('on'));
-$('btnPrint').onclick=doPrint;$('btnPrintAll').onclick=doPrint;
-$('btnBackup').onclick=async()=>{const photos=await idbPhotosAll();dlText(JSON.stringify({state:S,photos},null,2),'backup.json','application/json');};
-$('btnRestoreFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);S=d.state;saveAll();refreshAllUI();toast('⬆ بازیابی شد');}catch(err){toast('⚠️ نامعتبر','err');}};r.readAsText(f);};
-$('btnRegCheckExport').onclick=()=>{dlText(REG_CHECKS.map(r=>r.title).join('\n'),'checklist.txt');};
-$('btnDelAllCalcs').onclick=()=>{if(confirm('حذف همه؟')){D().calcs=[];saveAll();renderDash();}};
-window.addEventListener('online',()=>$('netBadge').classList.add('hidden'));
-window.addEventListener('offline',()=>$('netBadge').classList.remove('hidden'));
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(()=>{$('pwaStatus').textContent='فعال ✔';}).catch(()=>{$('pwaStatus').textContent='آماده (sw.js کنار index.html)';});}
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('btnPwaInstall').classList.remove('hidden');});
-$('btnPwaInstall').onclick=()=>{if(deferredPrompt){deferredPrompt.prompt();}};
-$('modalClose').onclick=()=>$('modal').classList.add('hidden');
-refreshAllUI();
-});
-</script>
-</body>
-</html>
-
-
-              <script>
-                              const CACHE_NAME='fire-exec-v1';
-const ASSETS=['./','./index.html','./manifest.json','./icon.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(ASSETS)));});
-self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});
-
-
-              </script>
-                        </body>
-                        </html>
-                    
