@@ -1,5 +1,5 @@
 
-@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:400;src:url("./Vazirmatn-Regular.woff2") format("woff2");font-display:swap;}
-@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:500;src:url("./Vazirmatn-Medium.woff2") format("woff2");font-display:swap;}
-@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:700;src:url("./Vazirmatn-Bold.woff2") format("woff2");font-display:swap;}
-@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:800;src:url("./Vazirmatn-ExtraBold.woff2") format("woff2");font-display:swap;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:400;src:url("./assets/fonts/Vazirmatn-Regular.woff2") format("woff2");font-display:swap;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:500;src:url("./assets/fonts/Vazirmatn-Medium.woff2") format("woff2");font-display:swap;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:700;src:url("./assets/fonts/Vazirmatn-Bold.woff2") format("woff2");font-display:swap;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:800;src:url("./assets/fonts/Vazirmatn-ExtraBold.woff2") format("woff2");font-display:swap;}
