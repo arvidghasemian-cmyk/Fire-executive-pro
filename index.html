@@ -2367,5 +2367,24 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 
 </script>
+<script src="license-manager.js"></script>
+<script>
+async function initLicenseSystem(){
+  const status=await LicenseManager.checkStatus();
+  const ls=document.getElementById('licenseSection');
+  if(!ls)return;
+  if(status.status==='free'||status.status==='invalid'){
+    ls.innerHTML=`<div style="background:rgba(231,76,60,0.05);padding:15px;border-radius:8px;margin:10px 0"><p style="color:#666;font-size:13px;margin-bottom:10px">نسخه رایگان فعال است</p><div style="background:rgba(231,76,60,0.1);padding:12px;border-radius:6px;margin-bottom:12px;border-right:3px solid #e74c3c"><p style="font-size:11px;color:#666;margin-bottom:5px">کد دستگاه شما:</p><p style="font-family:monospace;font-size:14px;color:#e74c3c;font-weight:bold;margin:8px 0;letter-spacing:1px">${status.deviceId}</p><button onclick="copyDeviceId('${status.deviceId}')" style="background:#e74c3c;color:white;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:11px">📋 کپی</button></div><div><label style="display:block;color:#666;font-size:11px;margin-bottom:5px">کد فعال‌سازی نسخه حرفه‌ای:</label><textarea id="activation-key-input" style="width:100%;padding:10px;background:rgba(0,0,0,0.05);border:1px solid #e74c3c;border-radius:4px;color:#333;font-family:monospace;font-size:10px;min-height:60px" rows="2" placeholder="کد فعال‌سازی را اینجا وارد کنید"></textarea><p style="font-size:10px;color:#999;margin:5px 0">💡 کد دستگاه را برای توسعه‌دهنده ارسال کنید تا کد فعال‌سازی دریافت کنید</p><button onclick="activateLicense()" style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:white;border:none;padding:10px;border-radius:4px;cursor:pointer;width:100%;font-weight:bold;font-size:12px">✅ فعال‌سازی نسخه حرفه‌ای</button></div></div>`;
+  }else if(status.status==='active'){
+    const planNames={professional:'حرفه‌ای',enterprise:'سازمانی'};
+    const daysLeft=Math.floor((new Date(status.expiresAt)-new Date())/(1000*60*60*24));
+    ls.innerHTML=`<div style="background:rgba(39,174,96,0.1);padding:15px;border-radius:8px;margin:10px 0;border:1px solid #27ae60"><h4 style="color:#27ae60;margin-bottom:10px;font-size:14px">✅ نسخه حرفه‌ای فعال</h4><p style="font-size:12px;color:#333;margin:5px 0"><strong>نوع اشتراک:</strong> <span style="color:#27ae60;font-weight:bold">${planNames[status.plan.type]||status.plan.type}</span></p><p style="font-size:12px;color:#333;margin:5px 0"><strong>انقضا:</strong> <span style="font-weight:bold">${new Date(status.expiresAt).toLocaleDateString('fa-IR')}</span></p><p style="font-size:12px;color:#333;margin:5px 0"><strong>روزهای باقیمانده:</strong> <span style="color:#e74c3c;font-weight:bold">${daysLeft} روز</span></p><button onclick="deactivateLicense()" style="background:#e74c3c;color:white;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;margin-top:10px;font-size:11px">❌ غیرفعال‌سازی</button></div>`;
+  }
+}
+async function copyDeviceId(d){try{await navigator.clipboard.writeText(d);alert('✅ کپی شد:\n'+d)}catch(e){const t=document.createElement('textarea');t.value=d;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);alert('✅ کپی شد:\n'+d)}}
+async function activateLicense(){const k=document.getElementById('activation-key-input').value.trim();if(!k){alert(' لطفاً کد فعال‌سازی را وارد کنید');return}try{const l=JSON.parse(atob(k));const r=await LicenseManager.verifyLicense(l);if(r.valid){LicenseManager.saveLicense(l);alert('✅ لایسنس فعال شد!');location.reload()}else{alert('❌ کد نامعتبر است')}}catch(e){alert('❌ فرمت کد اشتباه است')}}
+function deactivateLicense(){if(confirm('آیا مطمئن هستید؟')){LicenseManager.clearLicense();location.reload()}}
+window.addEventListener('load',initLicenseSystem);
+</script>
 </body>
 </html>
