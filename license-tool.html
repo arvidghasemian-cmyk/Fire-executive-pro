@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔐 ابزار لایسنس - Fire Executive Pro</title>
+  <script src="https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Tahoma, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #e4e4e4;
+      padding: 15px;
+      direction: rtl;
+    }
+    .container { max-width: 600px; margin: 0 auto; }
+    .header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .header h1 { color: #ffd700; font-size: 22px; margin-bottom: 8px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 15px; }
+    .tab {
+      flex: 1;
+      padding: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+    }
+    .tab.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-color: #667eea;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+    }
+    .form-group { margin-bottom: 12px; }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #ffd700;
+      font-size: 13px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      color: #e4e4e4;
+      font-size: 13px;
+    }
+    .btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      width: 100%;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+    .btn:disabled { opacity: 0.5; }
+    .btn-success { background: linear-gradient(135deg, #00c864, #00a050); }
+    .key-display {
+      background: rgba(0,0,0,0.5);
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 6px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 10px;
+      word-break: break-all;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .alert {
+      padding: 12px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-size: 13px;
+    }
+    .alert-success { background: rgba(0,200,100,0.2); border: 1px solid #00c864; color: #00c864; }
+    .alert-info { background: rgba(102,126,234,0.2); border: 1px solid #667eea; color: #a8b8ff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔐 ابزار مدیریت لایسنس</h1>
+      <p>Fire Executive Pro</p>
+    </div>
+    
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab(1)">🔑 تولید کلید</div>
+      <div class="tab" onclick="switchTab(2)">🎫 تولید لایسنس</div>
+    </div>
+    
+    <!-- تب ۱: تولید کلید -->
+    <div id="tab1" class="tab-content active">
+      <div class="box">
+        <h3 style="color: #ffd700; margin-bottom: 10px;"> تولید جفت کلید RSA-2048</h3>
+        <button class="btn" id="genKeyBtn" onclick="generateKeyPair()">
+          🎲 تولید جفت کلید جدید
+        </button>
+        <div id="keyResult" style="display: none; margin-top: 15px;">
+          <div class="alert alert-success">✅ کلید با موفقیت تولید شد!</div>
+          
+          <div style="margin-top: 10px;">
+            <h4 style="color: #ff6b6b; margin: 10px 0;"> Private Key (نگه دارید)</h4>
+            <div class="key-display" id="privateKeyDisplay"></div>
+            <button class="btn" onclick="copyText('privateKeyPem')">📋 کپی</button>
+          </div>
+          
+          <div style="margin-top: 10px;">
+            <h4 style="color: #00c864; margin: 10px 0;">🌐 Public Key (در نرم‌افزار قرار دهید)</h4>
+            <div class="key-display" id="publicKeyDisplay"></div>
+            <button class="btn" onclick="copyText('publicKeyPem')">📋 کپی</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- تب ۲: تولید لایسنس -->
+    <div id="tab2" class="tab-content">
+      <div class="box">
+        <h3 style="color: #ffd700; margin-bottom: 10px;">🎫 تولید Activation Key</h3>
+        
+        <div class="alert alert-info">
+          <strong>وضعیت:</strong>
+          <span id="keyStatus">❌ کلید بارگذاری نشده</span>
+        </div>
+        
+        <div class="form-group">
+          <label>Private Key (از تب ۱)</label>
+          <textarea id="privateKeyInput" rows="5" placeholder="-----BEGIN RSA PRIVATE KEY-----..."></textarea>
+          <button class="btn" onclick="loadPrivateKey()"> بارگذاری</button>
+        </div>
+        
+        <div class="form-group">
+          <label>Device ID مشتری</label>
+          <input type="text" id="deviceId" placeholder="A3F7-B2C1-9D4E-8F12">
+        </div>
+        
+        <div class="form-group">
+          <label>نام مشتری</label>
+          <input type="text" id="customerName" placeholder="مهندس احمدی">
+        </div>
+        
+        <div class="form-group">
+          <label>نوع پلن</label>
+          <select id="planType">
+            <option value="professional">حرفه‌ای</option>
+            <option value="enterprise">سازمانی</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>مدت اشتراک</label>
+          <select id="planTier">
+            <option value="monthly">ماهانه</option>
+            <option value="annual">سالانه</option>
+            <option value="lifetime">مادام‌العمر</option>
+          </select>
+        </div>
+        
+        <button class="btn btn-success" onclick="generateLicense()">
+          🎫 تولید Activation Key
+        </button>
+        
+        <div id="licenseResult" style="display: none; margin-top: 15px;">
+          <div class="alert alert-success">✅ لایسنس تولید شد!</div>
+          <h4 style="margin: 10px 0;">Activation Key:</h4>
+          <div class="key-display" id="activationKeyDisplay"></div>
+          <button class="btn" onclick="copyText('activationKey')">📋 کپی برای ارسال</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    let privateKeyObj = null;
+    let privateKeyPem = '';
+    let publicKeyPem = '';
+    
+    function switchTab(num) {
+      document.querySelectorAll('.tab').forEach((t, i) => {
+        t.classList.toggle('active', i === num - 1);
+      });
+      document.querySelectorAll('.tab-content').forEach((c, i) => {
+        c.classList.toggle('active', i === num - 1);
+      });
+    }
+    
+    async function generateKeyPair() {
+      const btn = document.getElementById('genKeyBtn');
+      btn.disabled = true;
+      btn.textContent = ' در حال تولید...';
+      
+      try {
+        const keypair = forge.pki.rsa.generateKeyPair({ bits: 2048 });
+        privateKeyPem = forge.pki.privateKeyToPem(keypair.privateKey);
+        publicKeyPem = forge.pki.publicKeyToPem(keypair.publicKey);
+        
+        localStorage.setItem('fep_private_key', privateKeyPem);
+        localStorage.setItem('fep_public_key', publicKeyPem);
+        
+        document.getElementById('privateKeyDisplay').textContent = privateKeyPem;
+        document.getElementById('publicKeyDisplay').textContent = publicKeyPem;
+        document.getElementById('keyResult').style.display = 'block';
+        
+        privateKeyObj = keypair.privateKey;
+        
+        btn.textContent = '✅ کلید تولید شد';
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = '🔄 تولید کلید جدید';
+        }, 2000);
+        
+      } catch (error) {
+        alert('❌ خطا: ' + error.message);
+        btn.disabled = false;
+        btn.textContent = '🎲 تولید جفت کلید جدید';
+      }
+    }
+    
+    function loadPrivateKey() {
+      const pem = document.getElementById('privateKeyInput').value.trim();
+      if (!pem) {
+        alert('لطفاً Private Key را وارد کنید');
+        return;
+      }
+      
+      try {
+        privateKeyObj = forge.pki.privateKeyFromPem(pem);
+        privateKeyPem = pem;
+        alert('✅ Private Key بارگذاری شد');
+        document.getElementById('keyStatus').innerHTML = '✅ کلید آماده است';
+        document.getElementById('keyStatus').style.color = '#00c864';
+      } catch (error) {
+        alert('❌ خطا: ' + error.message);
+      }
+    }
+    
+    function generateLicense() {
+      if (!privateKeyObj) {
+        alert('❌ ابتدا Private Key را بارگذاری کنید');
+        return;
+      }
+      
+      const deviceId = document.getElementById('deviceId').value.trim();
+      const customerName = document.getElementById('customerName').value.trim();
+      const planType = document.getElementById('planType').value;
+      const planTier = document.getElementById('planTier').value;
+      
+      if (!deviceId || !customerName) {
+        alert('❌ Device ID و نام مشتری الزامی است');
+        return;
+      }
+      
+      const now = new Date();
+      let expiresAt;
+      
+      if (planTier === 'monthly') {
+        expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+      } else if (planTier === 'annual') {
+        expiresAt = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+      } else {
+        expiresAt = new Date(2099, 11, 31);
+      }
+      
+      const licenseData = {
+        version: "1.0",
+        licenseId: `LIC-${now.getFullYear()}-${deviceId.substring(0, 4)}`,
+        deviceId: deviceId,
+        customer: { name: customerName },
+        plan: { type: planType, tier: planTier },
+        dates: {
+          issuedAt: now.toISOString(),
+          expiresAt: expiresAt.toISOString(),
+          gracePeriodDays: 7
+        }
+      };
+      
+      try {
+        const md = forge.md.sha256.create();
+        md.update(JSON.stringify(licenseData), 'utf8');
+        const signature = privateKeyObj.sign(md);
+        const signatureBase64 = forge.util.encode64(signature);
+        
+        licenseData.signature = signatureBase64;
+        const activationKey = forge.util.encode64(JSON.stringify(licenseData));
+        
+        document.getElementById('activationKeyDisplay').textContent = activationKey;
+        document.getElementById('licenseResult').style.display = 'block';
+        window.activationKey = activationKey;
+        
+        alert('✅ لایسنس با موفقیت تولید شد!');
+      } catch (error) {
+        alert(' خطا: ' + error.message);
+      }
+    }
+    
+    function copyText(varName) {
+      let text = '';
+      if (varName === 'privateKeyPem') text = privateKeyPem;
+      else if (varName === 'publicKeyPem') text = publicKeyPem;
+      else if (varName === 'activationKey') text = window.activationKey || '';
+      
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ کپی شد');
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        alert('✅ کپی شد');
+      });
+    }
+    
+    // بارگذاری خودکار کلیدهای ذخیره‌شده
+    window.addEventListener('load', () => {
+      const savedPrivate = localStorage.getItem('fep_private_key');
+      if (savedPrivate) {
+        document.getElementById('privateKeyInput').value = savedPrivate;
+        try {
+          privateKeyObj = forge.pki.privateKeyFromPem(savedPrivate);
+          privateKeyPem = savedPrivate;
+          document.getElementById('keyStatus').innerHTML = '✅ کلید از حافظه بارگذاری شد';
+          document.getElementById('keyStatus').style.color = '#00c864';
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
