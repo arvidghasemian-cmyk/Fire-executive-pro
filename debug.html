@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔧 عیب‌یاب لایسنس</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #1a1a2e;
+      color: #e4e4e4;
+      padding: 15px;
+      direction: rtl;
+      margin: 0;
+    }
+    .box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+    }
+    .status-ok { color: #00c864; }
+    .status-err { color: #ff3232; }
+    .status-warn { color: #ffa500; }
+    .log-box {
+      background: #000;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 11px;
+      max-height: 300px;
+      overflow-y: auto;
+      direction: ltr;
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      width: 100%;
+      font-size: 15px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+    .btn:disabled { opacity: 0.5; }
+    h2 { color: #ffd700; font-size: 18px; }
+    .info { font-size: 12px; color: #aaa; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <h2>🔧 عیب‌یاب سیستم لایسنس</h2>
+  
+  <div class="box">
+    <h3>📊 اطلاعات محیط اجرا</h3>
+    <div id="envInfo"></div>
+  </div>
+  
+  <div class="box">
+    <h3>📚 وضعیت کتابخانه‌ها</h3>
+    <div id="libStatus"></div>
+  </div>
+  
+  <div class="box">
+    <h3>🔑 تولید کلید RSA-2048</h3>
+    <div id="keyStatus">آماده</div>
+    <button class="btn" id="genBtn" onclick="testGenerate()">
+      🎲 تست تولید کلید
+    </button>
+    <div class="info">⏱️ این کار ۳ تا ۱۵ ثانیه طول می‌کشد</div>
+  </div>
+  
+  <div class="box">
+    <h3>📝 لاگ کامل (برای ارسال به من)</h3>
+    <div id="logBox" class="log-box">در انتظار اجرا...</div>
+    <button class="btn" onclick="copyLog()">📋 کپی لاگ</button>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js"></script>
+  <script>
+    const logs = [];
+    
+    function log(msg, type = 'info') {
+      const time = new Date().toLocaleTimeString();
+      const line = `[${time}] ${msg}`;
+      logs.push(line);
+      
+      const logBox = document.getElementById('logBox');
+      const color = type === 'err' ? '#ff3232' : 
+                    type === 'ok' ? '#00c864' : 
+                    type === 'warn' ? '#ffa500' : '#e4e4e4';
+      logBox.innerHTML += `<span style="color:${color}">${line}</span>\n`;
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // بررسی محیط اجرا
+    // ═══════════════════════════════════════════════════════
+    function checkEnvironment() {
+      const info = document.getElementById('envInfo');
+      const checks = [];
+      
+      // پروتکل
+      const protocol = location.protocol;
+      const isSecure = location.isSecureContext || 
+                       protocol === 'https:' || 
+                       location.hostname === 'localhost';
+      checks.push({
+        name: 'پروتکل',
+        value: protocol,
+        ok: isSecure,
+        detail: isSecure ? '✅ Secure' : '❌ ناامن'
+      });
+      
+      // Host
+      checks.push({
+        name: 'هاست',
+        value: location.hostname,
+        ok: true,
+        detail: ''
+      });
+      
+      // URL کامل
+      checks.push({
+        name: 'URL',
+        value: location.href.substring(0, 60) + '...',
+        ok: true,
+        detail: ''
+      });
+      
+      // User Agent
+      checks.push({
+        name: 'مرورگر',
+        value: navigator.userAgent.substring(0, 50) + '...',
+        ok: true,
+        detail: ''
+      });
+      
+      // Web Crypto
+      const hasCrypto = !!window.crypto && !!window.crypto.subtle;
+      checks.push({
+        name: 'Web Crypto API',
+        value: hasCrypto ? 'موجود' : 'ناموجود',
+        ok: hasCrypto,
+        detail: hasCrypto ? '✅' : '❌'
+      });
+      
+      // HTTPS
+      checks.push({
+        name: 'HTTPS',
+        value: protocol === 'https:' ? 'بله' : 'خیر',
+        ok: protocol === 'https:',
+        detail: protocol === 'https:' ? '✅' : '⚠️'
+      });
+      
+      let html = '';
+      checks.forEach(c => {
+        const color = c.ok ? 'status-ok' : 'status-err';
+        html += `<div class="${color}">
+          <strong>${c.name}:</strong> ${c.value} ${c.detail}
+        </div>`;
+        log(`${c.name}: ${c.value} ${c.detail}`, c.ok ? 'ok' : 'err');
+      });
+      
+      info.innerHTML = html;
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // بررسی کتابخانه forge
+    // ═══════════════════════════════════════════════════════
+    function checkLibraries() {
+      const status = document.getElementById('libStatus');
+      let html = '';
+      
+      // forge.js
+      const hasForge = typeof forge !== 'undefined';
+      html += `<div class="${hasForge ? 'status-ok' : 'status-err'}">
+        <strong>forge.js:</strong> ${hasForge ? '✅ بارگذاری شده' : '❌ بارگذاری نشده'}
+      </div>`;
+      log(`forge.js: ${hasForge ? 'loaded' : 'NOT loaded'}`, hasForge ? 'ok' : 'err');
+      
+      if (hasForge) {
+        try {
+          const version = forge.version || 'unknown';
+          html += `<div class="info">نسخه: ${version}</div>`;
+          log(`forge version: ${version}`, 'info');
+        } catch (e) {
+          log(`forge version error: ${e.message}`, 'err');
+        }
+        
+        // بررسی توابع مهم
+        const funcs = ['pki', 'md', 'util', 'random'];
+        funcs.forEach(f => {
+          const has = !!forge[f];
+          html += `<div class="${has ? 'status-ok' : 'status-err'}" style="padding-right:20px;">
+            forge.${f}: ${has ? '✅' : '❌'}
+          </div>`;
+        });
+      } else {
+        html += `<div class="status-err" style="margin-top:10px;">
+          ⚠️ کتابخانه forge.js لود نشده. دلایل احتمالی:<br>
+          • اینترنت ضعیف<br>
+          • CDN بلاک شده<br>
+          • فایل به درستی آپلود نشده
+        </div>`;
+      }
+      
+      status.innerHTML = html;
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // تست تولید کلید
+    // ═══════════════════════════════════════════════════════
+    async function testGenerate() {
+      const btn = document.getElementById('genBtn');
+      const status = document.getElementById('keyStatus');
+      
+      btn.disabled = true;
+      btn.textContent = '⏳ در حال تولید...';
+      status.textContent = '⏳ شروع شد...';
+      log('=== شروع تست تولید کلید ===', 'info');
+      
+      try {
+        // مرحله ۱: بررسی forge
+        log('مرحله ۱: بررسی forge...', 'info');
+        if (typeof forge === 'undefined') {
+          throw new Error('forge تعریف نشده - کتابخانه لود نشده');
+        }
+        if (!forge.pki) throw new Error('forge.pki موجود نیست');
+        log('✅ forge آماده است', 'ok');
+        
+        // مرحله ۲: شروع تولید
+        status.textContent = '⏳ در حال محاسبه RSA-2048 (۳-۱۵ ثانیه)...';
+        log('مرحله ۲: شروع تولید کلید RSA-2048...', 'info');
+        const startTime = Date.now();
+        
+        // نکته مهم: در مرورگر موبایل، تولید کلید ممکن است UI را فریز کند
+        // برای جلوگیری از این، از setTimeout استفاده می‌کنیم
+        await new Promise(resolve => setTimeout(resolve, 50));
+        
+        const keypair = forge.pki.rsa.generateKeyPair({ 
+          bits: 2048, 
+          workers: -1,
+          e: 0x10001
+        });
+        
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+        log(`✅ کلید تولید شد در ${elapsed} ثانیه`, 'ok');
+        
+        // مرحله ۳: تبدیل به PEM
+        status.textContent = '⏳ تبدیل به فرمت PEM...';
+        log('مرحله ۳: تبدیل به PEM...', 'info');
+        
+        const privateKeyPem = forge.pki.privateKeyToPem(keypair.privateKey);
+        const publicKeyPem = forge.pki.publicKeyToPem(keypair.publicKey);
+        
+        log(`✅ Private Key: ${privateKeyPem.length} کاراکتر`, 'ok');
+        log(`✅ Public Key: ${publicKeyPem.length} کاراکتر`, 'ok');
+        
+        // مرحله ۴: ذخیره
+        try {
+          localStorage.setItem('test_private_key', privateKeyPem);
+          localStorage.setItem('test_public_key', publicKeyPem);
+          log('✅ در localStorage ذخیره شد', 'ok');
+        } catch (e) {
+          log(`⚠️ خطا در ذخیره: ${e.message}`, 'warn');
+        }
+        
+        // موفقیت
+        status.innerHTML = `<span class="status-ok">✅ با موفقیت انجام شد (${elapsed}s)</span>`;
+        btn.textContent = '✅ موفق - دوباره تست کن';
+        btn.disabled = false;
+        
+        // نمایش نمونه
+        log('\n=== نمونه Public Key ===', 'info');
+        log(publicKeyPem.substring(0, 200) + '...', 'info');
+        
+        alert(`✅ موفق!\n\nکلید در ${elapsed} ثانیه تولید شد.\n\nPublic Key:\n${publicKeyPem.substring(0, 100)}...`);
+        
+      } catch (error) {
+        log(`❌ خطا: ${error.message}`, 'err');
+        log(`Stack: ${error.stack || 'no stack'}`, 'err');
+        status.innerHTML = `<span class="status-err">❌ خطا: ${error.message}</span>`;
+        btn.textContent = '❌ خطا - دوباره تلاش کن';
+        btn.disabled = false;
+        alert(`❌ خطا:\n${error.message}\n\nلاگ را کپی کنید و برای من بفرستید.`);
+      }
+    }
+    
+    function copyLog() {
+      const text = logs.join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ لاگ کپی شد. آن را برای من بفرستید.');
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        alert('✅ لاگ کپی شد');
+      });
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // شروع
+    // ═══════════════════════════════════════════════════════
+    window.addEventListener('load', () => {
+      log('=== شروع عیب‌یاب ===', 'info');
+      log(`URL: ${location.href}`, 'info');
+      checkEnvironment();
+      
+      // کمی صبر کنیم تا forge لود شود
+      setTimeout(() => {
+        checkLibraries();
+      }, 1000);
+    });
+    
+    // گرفتن خطاهای سراسری
+    window.addEventListener('error', (e) => {
+      log(`🔥 خطای سراسری: ${e.message}`, 'err');
+      log(`در: ${e.filename}:${e.lineno}`, 'err');
+    });
+  </script>
+</body>
+</html>
