@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e11d48">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2385,6 +2387,13 @@ async function copyDeviceId(d){try{await navigator.clipboard.writeText(d);alert(
 async function activateLicense(){const k=document.getElementById('activation-key-input').value.trim();if(!k){alert(' لطفاً کد فعال‌سازی را وارد کنید');return}try{const l=JSON.parse(atob(k));const r=await LicenseManager.verifyLicense(l);if(r.valid){LicenseManager.saveLicense(l);alert('✅ لایسنس فعال شد!');location.reload()}else{alert('❌ کد نامعتبر است')}}catch(e){alert('❌ فرمت کد اشتباه است')}}
 function deactivateLicense(){if(confirm('آیا مطمئن هستید؟')){LicenseManager.clearLicense();location.reload()}}
 window.addEventListener('load',initLicenseSystem);
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(r => console.log('✅ SW OK', r.scope))
+    .catch(e => console.error('❌ SW FAIL', e));
+}
 </script>
 </body>
 </html>
