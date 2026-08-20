@@ -2,6 +2,114 @@
 <html lang="fa" dir="rtl">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#e11d48">
+<style>
+/* استایل مدیریت پروژه */
+.project-manager {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.project-manager h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #1a2230;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+}
+.project-item.active {
+  border-color: #e63926;
+  background: #fef2f2;
+}
+.project-item:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.project-info {
+  flex: 1;
+}
+.project-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a2230;
+  margin-bottom: 4px;
+}
+.project-date {
+  font-size: 11px;
+  color: #6b7280;
+}
+.project-actions {
+  display: flex;
+  gap: 6px;
+}
+.btn-switch, .btn-edit, .btn-delete {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.btn-switch {
+  background: #2563eb;
+  color: white;
+}
+.btn-switch:hover {
+  background: #1d4ed8;
+}
+.btn-edit {
+  background: #f3f4f6;
+  color: #374151;
+}
+.btn-edit:hover {
+  background: #e5e7eb;
+}
+.btn-delete {
+  background: #fee2e2;
+  color: #dc2626;
+}
+.btn-delete:hover {
+  background: #fecaca;
+}
+.badge-active {
+  background: #10b981;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.btn-new-project {
+  width: 100%;
+  padding: 10px;
+  background: #e63926;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.btn-new-project:hover {
+  background: #c92f1e;
+}
+</style>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
