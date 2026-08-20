@@ -1,5 +1,53 @@
-const CACHE_NAME="fire-executive-pro-offline-final-v1";
-const CORE=["./","./index.html","./manifest.json","./assets/js/three.min.js","./assets/fonts/local-fonts.css","./assets/fonts/Vazirmatn-Regular.woff2","./assets/fonts/Vazirmatn-Medium.woff2","./assets/fonts/Vazirmatn-Bold.woff2","./assets/fonts/Vazirmatn-ExtraBold.woff2"];
-self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(CORE)));self.skipWaiting()});
-self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
-self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;e.respondWith(caches.match(e.request).then(x=>x||fetch(e.request).then(r=>{if(new URL(e.request.url).origin===location.origin){const q=r.clone();caches.open(CACHE_NAME).then(c=>c.put(e.request,q))}return r}).catch(()=>caches.match("./index.html"))) )});
+const CACHE_NAME = 'fireexec-pro-v2'; // نسخه جدید برای پاک کردن کش‌های خراب قبلی
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './manifest.json'
+];
+
+// ۱. نصب و کش کردن فایل‌ها
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('[SW] فایل‌ها با موفقیت کش شدند');
+      return cache.addAll(ASSETS_TO_CACHE);
+    }).then(() => self.skipWaiting()) // فعال‌سازی فوری
+  );
+});
+
+// ۲. پاک کردن کش‌های قدیمی و خراب
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+      );
+    }).then(() => self.clients.claim()) // کنترل فوری صفحات باز
+  );
+});
+
+// ۳. مدیریت درخواست‌ها (استراتژی هوشمند)
+self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      // اگر در کش بود، همان را فوراً برگردان (سریع‌ترین حالت)
+      if (cached) return cached;
+
+      // اگر در کش نبود، از شبکه بگیر
+      return fetch(event.request).then(response => {
+        if (response && response.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => {
+        // 🚨 اگر آفلاین بود و صفحه اصلی درخواست شد، صفحه کش‌شده را برگردان
+        if (event.request.mode === 'navigate' || event.request.url.endsWith('.html')) {
+          return caches.match('./index.html');
+        }
+      });
+    })
+  );
+});
