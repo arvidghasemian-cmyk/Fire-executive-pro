@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#e11d48">
 <style>
 /* استایل مدیریت پروژه */
 .project-manager {
@@ -113,15 +111,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fire Executive Pro v7.3.2 · دستیار اجرایی آتش‌نشانی — نسخه نهایی</title>
+<title>Fire Executive Pro v7.3.3 · دستیار اجرایی آتش‌نشانی — نسخه پایدار</title>
 <!--
+v7.3.3 — تثبیت PWA و هویت بصری:
+① حفظ کامل قابلیت‌های v7.3.2 و تغییرات فعلی پروژه
+② یکپارچه‌سازی آیکون محلی، favicon و Maskable Icon
+③ حذف ارجاع خارجی Qwen از Manifest دانلودی و اصلاح کش آفلاین
+
 v7.3.2 — نسخه نهایی:
 ① تمام تعمیرات v7.3.1 (سینتکس، CSS گمشده، اتصال bindFloors/bindNumericChecks، موتور الزامات، تب‌های یکپارچه)
 ② غنی‌سازی بانک مبحث ۱۴ (ویرایش ۱۳۹۶) با رکوردهای فصل‌محور — فقط موارد تأییدشده، بدون عدد ساختگی
 ③ اتصال الزامات به ماژول تهویه پارکینگ و ممیزی (پیش‌فرض‌های مبحث ۳ + فیلدهای الزام‌آور مبحث ۱۴)
 ④ ارجاع رسمی به منابع inbr.ir در فوتر
 -->
-<link rel="icon" href="./favicon.png">/b0cd9218-7e83-4974-9d39-b39f90f741b8/1450e3cab-0fcd-4149-b973-b2b5e42cbb98.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./favicon.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
 <meta name="theme-color" content="#e11d48">
 <link rel="manifest" href="./manifest.json">
 
@@ -315,7 +319,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 <div class="wrap headerRow">
 <div class="brand">
   <img src="./icon-192.png" alt="دستیار اجرایی آتش‌نشانی">
-<div><h1>🚒 دستیار اجرایی آتش‌نشانی</h1><p>مبحث ۳ (۱۳۹۵) و مبحث ۱۴ (۱۳۹۶) + NFPA · نسخه نهایی v7.3.2</p></div>
+<div><h1>🚒 دستیار اجرایی آتش‌نشانی</h1><p>مبحث ۳ (۱۳۹۵) و مبحث ۱۴ (۱۳۹۶) + NFPA · نسخه پایدار v7.3.3</p></div>
 </div>
 <div class="projBox">
 <span id="netBadge" class="netBadge hidden">📴 آفلاین</span>
@@ -758,7 +762,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 </section>
 </main>
 <footer>
-<b>دستیار اجرایی آتش‌نشانی — نسخه نهایی v7.3.2</b><br>
+<b>دستیار اجرایی آتش‌نشانی — نسخه پایدار v7.3.3</b><br>
 منابع اصلی: <b>مبحث سوم حفاظت ساختمان‌ها در مقابل حریق (ویرایش سوم ۱۳۹۵)</b> · <b>مبحث چهاردهم تأسیسات مکانیکی (ویرایش ۱۳۹۶)</b><br>
 <span style="font-size:10px">inbr.ir/mabhas3-95.pdf · inbr.ir/mabhas14-96.pdf · به‌همراه مراجع NFPA 13/20/37/92/10</span><br>
 برآورد اولیه کارگاهی — نه طراحی قطعی · ذخیره‌سازی: عکس‌ها در IndexedDB + متادیتا در localStorage · آماده PWA
@@ -966,7 +970,7 @@ host.querySelectorAll('.regBtn').forEach(b=>b.onclick=e=>{const id=e.target.clos
 host.querySelectorAll('[data-regnote]').forEach(t=>t.onchange=e=>{const id=e.target.dataset.regnote;const cur=d.regChecks[id]||{s:0,note:'',ts:null};d.regChecks[id]={...cur,note:e.target.value,ts:Date.now()};saveAll();});
 }
 function exportRegChecklist(){
-const d=D(), lines=['FIRE EXECUTIVE PRO v7.3.2 — چک‌لیست هوشمند مقرراتی','پروژه: '+(D().meta?.address||'بدون عنوان'),'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
+const d=D(), lines=['FIRE EXECUTIVE PRO v7.3.3 — چک‌لیست هوشمند مقرراتی','پروژه: '+(D().meta?.address||'بدون عنوان'),'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
 REG_CHECKS.filter(r=>r.when(d)).forEach((r,i)=>{const st=d.regChecks?.[r.id]||{s:0,note:''};lines.push(`${i+1}. ${r.title}`);lines.push(`وضعیت: ${regStatusLabel(st.s)}`);lines.push(`مرجع: ${r.src} — ${r.ref}`);lines.push(`یادداشت: ${st.note||'—'}`);lines.push('');});
 dlText(lines.join('\n'),'regulatory_checklist_v7_3_2.txt','text/plain;charset=utf-8');
 }
@@ -1641,21 +1645,30 @@ window.addEventListener('online',()=>$('netBadge').classList.add('hidden'));
 window.addEventListener('offline',()=>$('netBadge').classList.remove('hidden'));
 if(!navigator.onLine)$('netBadge').classList.remove('hidden');
 $('btnSwDl').onclick=()=>{
-const swCode=`const CACHE_NAME='fire-exec-v2';
-const ASSETS=['./','./index.html'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(ASSETS)));});
-self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
+const swCode=`const CACHE_NAME='fireexec-pro-v4';
+const ASSETS=['./','./index.html','./manifest.json','./favicon.png','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./license-manager.js'];
+self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>e.request.mode==='navigate'?caches.match('./index.html'):undefined)));});`;
 dlText(swCode,'sw.js','application/javascript');
 };
 $('btnManifestDl').onclick=()=>{
 const manifest={
 name:"دستیار اجرایی آتش‌نشانی",
 short_name:"آتش‌نشانی",
+description:"نرم‌افزار محاسبات و بازرسی آتش‌نشانی - مبحث ۳ و ۱۴ + NFPA",
 start_url:"./index.html",
+scope:"./",
 display:"standalone",
 background_color:"#0d1322",
 theme_color:"#e11d48",
-icons:[{src:"https://image.qwenlm.ai/public_source/b0cd9218-7e83-4974-9d39-b39f90f741b8/1450e3cab-0fcd-4149-b973-b2b5e42cbb98.png",sizes:"192x192",type:"image/png"}]
+lang:"fa",
+dir:"rtl",
+icons:[
+{src:"./icon-192.png",sizes:"192x192",type:"image/png",purpose:"any"},
+{src:"./icon-512.png",sizes:"512x512",type:"image/png",purpose:"any"},
+{src:"./icon-maskable-512.png",sizes:"512x512",type:"image/png",purpose:"maskable"}
+]
 };
 dlText(JSON.stringify(manifest,null,2),'manifest.json','application/json');
 };
@@ -1718,7 +1731,7 @@ $('ruleQC').innerHTML=qc.length?qc.map(x=>`<div class="ruleItem" style="border-c
 }
 function exportRuleEngine(){
 const fs=getFloors();
-const lines=['FIRE EXECUTIVE PRO v7.3.2 — ارزیابی موتور الزامات','پروژه: '+((S.projects.find(p=>p.id===S.activeId)||{}).name||'—'),'نوع ساختمان: '+buildingTypeLabels().join(' + '),'تعداد بازه طبقات: '+fs.length,'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
+const lines=['FIRE EXECUTIVE PRO v7.3.3 — ارزیابی موتور الزامات','پروژه: '+((S.projects.find(p=>p.id===S.activeId)||{}).name||'—'),'نوع ساختمان: '+buildingTypeLabels().join(' + '),'تعداد بازه طبقات: '+fs.length,'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
 ruleSet().filter(r=>r.on).forEach((r,i)=>{lines.push((i+1)+'. '+r.t);lines.push('مرجع: '+r.ref);lines.push('دلیل فعال‌سازی: '+r.why);lines.push('');});
 lines.push('— کنترل کیفیت ساختار طبقات —');
 $('ruleQC').querySelectorAll('.ruleItem').forEach(el=>lines.push('• '+el.textContent.trim()));
