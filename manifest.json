@@ -1,11 +1,24 @@
 {
   "name": "دستیار اجرایی آتش‌نشانی",
   "short_name": "آتش‌نشانی",
+  "description": "نرم‌افزار محاسبات و بازرسی آتش‌نشانی - مبحث ۳ و ۱۴ + NFPA",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0d1322",
   "theme_color": "#e11d48",
   "lang": "fa",
-  "dir": "rtl"
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
