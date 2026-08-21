@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fireexec-pro-v2'; // نسخه جدید برای پاک کردن کش‌های خراب قبلی
+const CACHE_NAME = 'fireexec-pro-v3'; // نسخه جدید برای پاک کردن کش‌های خراب قبلی
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
