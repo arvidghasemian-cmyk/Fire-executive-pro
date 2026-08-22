@@ -111,7 +111,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fire Executive Pro v7.3.3 · دستیار اجرایی آتش‌نشانی — نسخه پایدار</title>
+<title>Fire Executive Pro v7.3.3 · دستیار مهندسی ایمنی و آتش‌نشانی — نسخه پایدار</title>
 <!--
 v7.3.3 — تثبیت PWA و هویت بصری:
 ① حفظ کامل قابلیت‌های v7.3.2 و تغییرات فعلی پروژه
@@ -318,8 +318,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 <header>
 <div class="wrap headerRow">
 <div class="brand">
-  <img src="./icon-192.png" alt="دستیار اجرایی آتش‌نشانی">
-<div><h1>🚒 دستیار اجرایی آتش‌نشانی</h1><p>مبحث ۳ (۱۳۹۵) و مبحث ۱۴ (۱۳۹۶) + NFPA · نسخه پایدار v7.3.3</p></div>
+<div><h1>دستیار مهندسی ایمنی و آتش‌نشانی</h1><p>مبحث ۳ (۱۳۹۵) و مبحث ۱۴ (۱۳۹۶) + NFPA · نسخه پایدار v7.3.3</p></div>
 </div>
 <div class="projBox">
 <span id="netBadge" class="netBadge hidden">📴 آفلاین</span>
@@ -455,7 +454,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 <div class="actions" style="margin-bottom:10px"><button class="btn ghost" id="btnRegCheckExport">📄 خروجی</button><button class="btn ghost" id="btnRegCheckReset">↺ بازنشانی</button></div>
 <div id="regCheckBox"></div></div>
 <div class="card" style="margin-bottom:16px"><h3>🏢 چک‌لیست اختصاصی نوع</h3><div class="sub" id="chkTypeSub"></div><div id="chkTypeBox"></div></div>
-<div class="card"><h3>🚒 چک‌لیست عمومی بازدید</h3><div id="chkGenBox"></div></div>
+<div class="card"><h3>چک‌لیست عمومی بازدید</h3><div id="chkGenBox"></div></div>
 </section>
 
 <section class="sec hidden" id="sec-numcheck">
@@ -473,7 +472,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 <div class="card"><h3>🚗 تهویه طبیعی پارکینگ</h3>
 <div class="formRow"><div class="field"><label>کف (m²)</label><input id="ncParkFloor" type="number"></div><div class="field"><label>بازشوها (m²)</label><input id="ncParkOpen" type="number"></div><div class="field"><label>دو دیوار مقابل (m²)</label><input id="ncParkOpp" type="number"></div></div>
 <button class="btn primary" id="btnNcParking">بررسی</button><div id="ncParkingOut" class="note"></div></div>
-<div class="card"><h3>🚒 دسترسی آتش‌نشانی</h3>
+<div class="card"><h3>دسترسی آتش‌نشانی</h3>
 <div class="formRow"><div class="field"><label>ارتفاع (m)</label><input id="ncFireH" type="number"></div><div class="field"><label>عرض معبر (m)</label><input id="ncFireRoad" type="number"></div><div class="field"><label>فاصله حاشیه (m)</label><input id="ncFireDist" type="number"></div></div>
 <button class="btn primary" id="btnNcFireAccess">بررسی</button><div id="ncFireOut" class="note"></div></div>
 </div></div>
@@ -762,7 +761,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 </section>
 </main>
 <footer>
-<b>دستیار اجرایی آتش‌نشانی — نسخه پایدار v7.3.3</b><br>
+<b>دستیار مهندسی ایمنی و آتش‌نشانی — نسخه پایدار v7.3.3</b><br>
 منابع اصلی: <b>مبحث سوم حفاظت ساختمان‌ها در مقابل حریق (ویرایش سوم ۱۳۹۵)</b> · <b>مبحث چهاردهم تأسیسات مکانیکی (ویرایش ۱۳۹۶)</b><br>
 <span style="font-size:10px">inbr.ir/mabhas3-95.pdf · inbr.ir/mabhas14-96.pdf · به‌همراه مراجع NFPA 13/20/37/92/10</span><br>
 برآورد اولیه کارگاهی — نه طراحی قطعی · ذخیره‌سازی: عکس‌ها در IndexedDB + متادیتا در localStorage · آماده PWA
@@ -1205,7 +1204,7 @@ panel.innerHTML='<div class="auditItem"><b>🧾 '+esc(lastRes[n].title)+'</b><sp
 }
 function exportCalcTrace(){
 const d=D(), rows=(d.calcs||[]); if(!rows.length){toast('⚠️ هنوز محاسبه‌ای برای ردیابی ثبت نشده است','err');return;}
-const out=['ردیابی مهندسی محاسبات — دستیار اجرایی آتش‌نشانی','پروژه: '+((S.projects.find(p=>p.id===S.activeId)||{}).name||'—'),'تاریخ خروجی: '+new Date().toLocaleString('fa-IR'),''];
+const out=['ردیابی مهندسی محاسبات — دستیار مهندسی ایمنی و آتش‌نشانی','پروژه: '+((S.projects.find(p=>p.id===S.activeId)||{}).name||'—'),'تاریخ خروجی: '+new Date().toLocaleString('fa-IR'),''];
 rows.forEach((c,i)=>{const t=c.trace||{};out.push('--- '+(i+1)+' ---',c.title||'—','فرمول: '+(t.formula||'—'),'واحدها: '+(t.units||'—'),'مرجع/مبنا: '+(t.reference||'—'),'فرضیات/محدودیت: '+(t.assumptions||'—'),'ورودی‌های snapshot: '+JSON.stringify(c.inputs||{},null,2),'');});
 dlText(out.join('\n'),'calc_trace_'+todayStr()+'.txt','text/plain;charset=utf-8');
 }
@@ -1250,7 +1249,7 @@ return result;
 }
 function exportCalcAudit(){
 const r=runCalcAudit();
-const lines=['گزارش کنترل کیفیت محاسبات — دستیار اجرایی آتش‌نشانی','تاریخ: '+new Date().toLocaleString('fa-IR'),'','موارد نیازمند اصلاح: '+r.issues.length,...r.issues.map(x=>' - '+x),'','هشدارهای مهندسی: '+r.warnings.length,...r.warnings.map(x=>' - '+x),'','تذکر: این فایل ابزار کنترل ورودی است و جایگزین تأیید مهندسی، نقشه مصوب یا متن کامل استاندارد نیست.'];
+const lines=['گزارش کنترل کیفیت محاسبات — دستیار مهندسی ایمنی و آتش‌نشانی','تاریخ: '+new Date().toLocaleString('fa-IR'),'','موارد نیازمند اصلاح: '+r.issues.length,...r.issues.map(x=>' - '+x),'','هشدارهای مهندسی: '+r.warnings.length,...r.warnings.map(x=>' - '+x),'','تذکر: این فایل ابزار کنترل ورودی است و جایگزین تأیید مهندسی، نقشه مصوب یا متن کامل استاندارد نیست.'];
 dlText(lines.join('\n'),'calc_audit_'+todayStr()+'.txt','text/plain;charset=utf-8');
 }
 function calcAuditGate(n){
@@ -1392,7 +1391,7 @@ const css=`<style>@page{size:A4;margin:14mm 12mm}*{box-sizing:border-box}body{fo
 @media(max-width:800px){#licenseCard .grid2{grid-template-columns:1fr}#licenseCard button{width:100%;margin:4px 0}}
 </style>`;
 let h=css+'<div class="report">';
-h+='<section class="cover"><div style="font-size:54px">🚒</div><div class="big">دستیار اجرایی آتش‌نشانی</div><h1>گزارش حرفه‌ای بازدید و ارزیابی ایمنی حریق</h1><div class="big"><b>'+esc(projName)+'</b></div><table class="meta"><tr><td>شماره گزارش</td><td>'+esc(reportNo)+'</td></tr><tr><td>کارفرما</td><td>'+esc(m.client||'—')+'</td></tr><tr><td>آدرس</td><td>'+esc(m.address||'—')+'</td></tr><tr><td>نوع ساختمان</td><td>'+esc(bt)+'</td></tr><tr><td>تاریخ بازدید</td><td>'+esc(m.date?faDate(m.date):'—')+'</td></tr><tr><td>بازرس/مجری</td><td>'+esc(m.inspector||'—')+'</td></tr><tr><td>نتیجه</td><td><b>'+esc(status)+'</b></td></tr></table><div class="muted" style="margin-top:35px">تاریخ تهیه گزارش: '+esc(new Date().toLocaleDateString('fa-IR'))+'</div></section>';
+h+='<section class="cover"><div style="font-size:54px"></div><div class="big">دستیار مهندسی ایمنی و آتش‌نشانی</div><h1>گزارش حرفه‌ای بازدید و ارزیابی ایمنی حریق</h1><div class="big"><b>'+esc(projName)+'</b></div><table class="meta"><tr><td>شماره گزارش</td><td>'+esc(reportNo)+'</td></tr><tr><td>کارفرما</td><td>'+esc(m.client||'—')+'</td></tr><tr><td>آدرس</td><td>'+esc(m.address||'—')+'</td></tr><tr><td>نوع ساختمان</td><td>'+esc(bt)+'</td></tr><tr><td>تاریخ بازدید</td><td>'+esc(m.date?faDate(m.date):'—')+'</td></tr><tr><td>بازرس/مجری</td><td>'+esc(m.inspector||'—')+'</td></tr><tr><td>نتیجه</td><td><b>'+esc(status)+'</b></td></tr></table><div class="muted" style="margin-top:35px">تاریخ تهیه گزارش: '+esc(new Date().toLocaleDateString('fa-IR'))+'</div></section>';
 h+='<section class="section pagebreak"><h2>۱. خلاصه مدیریتی</h2><div class="summary"><div class="stat"><b>'+faN(ncr.length)+'</b>کل NCR</div><div class="stat"><b>'+faN(critical)+'</b>بحرانی</div><div class="stat"><b>'+faN(major)+'</b>مهم</div><div class="stat"><b>'+faN(closed)+'</b>بسته‌شده</div></div><div class="note" style="margin-top:10px">بر اساس اطلاعات ثبت‌شده در پروژه، '+(ncr.length?'موارد عدم‌انطباق شناسایی شده و در ادامه گزارش تشریح می‌شوند.':'عدم‌انطباقی در سامانه ثبت نشده است.')+' تعداد موارد جزئی: <b>'+faN(minor)+'</b> و تعداد محاسبات ثبت‌شده: <b>'+faN(calcs.length)+'</b>.</div></section>';
 h+='<section class="section"><h2>۲. مشخصات پروژه</h2><table class="tbl"><tr><th>عنوان</th><th>مقدار</th><th>عنوان</th><th>مقدار</th></tr><tr><td>پروژه</td><td>'+esc(projName)+'</td><td>نوع ساختمان</td><td>'+esc(bt)+'</td></tr><tr><td>کارفرما</td><td>'+esc(m.client||'—')+'</td><td>بازرس/مجری</td><td>'+esc(m.inspector||'—')+'</td></tr><tr><td>آدرس</td><td colspan="3">'+esc(m.address||'—')+'</td></tr><tr><td>تاریخ بازدید</td><td>'+esc(m.date?faDate(m.date):'—')+'</td><td>شماره گزارش</td><td>'+esc(reportNo)+'</td></tr></table></section>';
 h+='<section class="section"><h2>۳. جمع‌بندی و یادداشت کارشناس</h2><div class="note">'+esc(m.note||'یادداشتی ثبت نشده است.').replace(/\n/g,'<br>')+'</div></section>';
@@ -1402,7 +1401,7 @@ h+='<section class="section pagebreak"><h2>۶. کنترل کیفیت محاسب�
 const regItems=REG_CHECKS.filter(r=>r.when(d));
 h+='<section class="section pagebreak"><h2>۷. چک‌لیست هوشمند مقرراتی</h2>'+(regItems.length?'<table class="tbl"><tr><th>موضوع</th><th>وضعیت</th><th>مرجع</th><th>یادداشت</th></tr>'+regItems.map(r=>{const st=d.regChecks?.[r.id]||{s:0,note:''};return '<tr><td>'+esc(r.title)+'</td><td>'+esc(regStatusLabel(st.s))+'</td><td>'+esc(r.src+' — '+r.ref)+'</td><td>'+esc(st.note||'—')+'</td></tr>';}).join('')+'</table>':'<div class="note">چک‌لیست مقرراتی ثبت نشده است.</div>')+'</section>';
 h+='<section class="section"><h2>۸. نتیجه نهایی بازدید</h2><div class="note"><b>وضعیت:</b> '+esc(status)+'<br><br>این نتیجه بر مبنای اطلاعات و موارد ثبت‌شده در سامانه صادر شده است. کنترل نهایی انطباق با مدارک مصوب، نقشه‌ها و الزامات مرجع پروژه باید توسط مسئول ذی‌صلاح انجام شود.</div></section>';
-h+='<section class="section"><div class="sign"><div>امضا و تأیید بازرس<br><br><br>نام و امضا</div><div>امضا و تأیید کارفرما<br><br><br>نام و امضا</div></div><div class="footer">این گزارش از اطلاعات ثبت‌شده در «دستیار اجرایی آتش‌نشانی» تولید شده است. خروجی محاسبات موجود در برنامه، مطابق ساختار فعلی سامانه، برآورد اولیه کارگاهی است و به‌تنهایی جایگزین طراحی قطعی و مدارک مصوب پروژه نیست.</div></section></div>';
+h+='<section class="section"><div class="sign"><div>امضا و تأیید بازرس<br><br><br>نام و امضا</div><div>امضا و تأیید کارفرما<br><br><br>نام و امضا</div></div><div class="footer">این گزارش از اطلاعات ثبت‌شده در «دستیار مهندسی ایمنی و آتش‌نشانی» تولید شده است. خروجی محاسبات موجود در برنامه، مطابق ساختار فعلی سامانه، برآورد اولیه کارگاهی است و به‌تنهایی جایگزین طراحی قطعی و مدارک مصوب پروژه نیست.</div></section></div>';
 return h;
 }
 async function doPrint(){
@@ -1654,7 +1653,7 @@ dlText(swCode,'sw.js','application/javascript');
 };
 $('btnManifestDl').onclick=()=>{
 const manifest={
-name:"دستیار اجرایی آتش‌نشانی",
+name:"دستیار مهندسی ایمنی و آتش‌نشانی",
 short_name:"آتش‌نشانی",
 description:"نرم‌افزار محاسبات و بازرسی آتش‌نشانی - مبحث ۳ و ۱۴ + NFPA",
 start_url:"./index.html",
