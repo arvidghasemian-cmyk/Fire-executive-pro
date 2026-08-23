@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fireexec-pro-v5';
+const CACHE_NAME = 'fireexec-pro-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
