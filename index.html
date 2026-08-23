@@ -111,9 +111,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fire Executive Pro v7.3.3 · دستیار مهندسی ایمنی و آتش‌نشانی — نسخه پایدار</title>
+<title>Fire Executive Pro v7.3.10 · دستیار مهندسی ایمنی و آتش‌نشانی — نسخه تست کامل</title>
 <!--
-v7.3.3 — تثبیت PWA و هویت بصری:
+v7.3.10 — تثبیت PWA و هویت بصری:
 ① حفظ کامل قابلیت‌های v7.3.2 و تغییرات فعلی پروژه
 ② یکپارچه‌سازی آیکون محلی، favicon و Maskable Icon
 ③ حذف ارجاع خارجی Qwen از Manifest دانلودی و اصلاح کش آفلاین
@@ -312,6 +312,104 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 #m3Chapters{display:grid;grid-auto-rows:minmax(40px,auto);gap:2px}
 .m3Chapter{min-height:40px;padding:7px 10px;line-height:1.7}
 }
+
+
+/* ===== Project Center v7.3.10 ===== */
+.activeProjectStrip{
+  margin-top:12px;
+  background:linear-gradient(135deg,rgba(249,115,22,.07),rgba(225,29,72,.05));
+  border:1px solid rgba(225,29,72,.18);
+  border-radius:14px;
+  padding:10px 12px;
+}
+.activeProjectStripRow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.activeProjectMain{display:flex;align-items:center;gap:9px;min-width:0}
+.activeProjectDot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(22,163,74,.10);flex:0 0 auto}
+.activeProjectTitle{font-size:12px;color:var(--muted);font-weight:800}
+.activeProjectName{font-size:14px;color:var(--text);font-weight:900}
+.activeProjectChips{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.projectMetaChip{display:inline-flex;align-items:center;gap:4px;background:var(--chip);border:1px solid var(--border);border-radius:999px;padding:3px 8px;font-size:10.5px;color:var(--muted);font-weight:700}
+.activeProjectActions{display:flex;gap:6px;flex-wrap:wrap}
+
+.projectCenterToolbar{display:grid;grid-template-columns:minmax(220px,1.5fr) repeat(3,minmax(150px,.7fr));gap:9px;margin-top:12px}
+.projectCenterToolbar .field{margin:0}
+.projectSummaryBar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.projectSummaryPill{background:var(--chip);border:1px solid var(--border);border-radius:999px;padding:5px 10px;font-size:11.5px;font-weight:800}
+.projectMonthGroup{margin:14px 0}
+.projectMonthHead{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;background:var(--chip);border:1px solid var(--border);border-radius:12px;font-weight:900;cursor:pointer}
+.projectMonthHead small{color:var(--muted);font-weight:700}
+.projectMonthBody{display:grid;gap:8px;margin-top:8px}
+.projectMonthBody.collapsed{display:none}
+.projectCard{
+  border:1px solid var(--border);border-radius:14px;padding:12px;background:var(--card);
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center
+}
+.projectCard.active{border-color:rgba(225,29,72,.55);box-shadow:0 0 0 2px rgba(225,29,72,.07)}
+.projectCardName{font-size:14px;font-weight:900;margin-bottom:4px}
+.projectCardMeta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:10.8px}
+.projectCardActions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.projectStatus{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 8px;font-size:10.5px;font-weight:900}
+.projectStatus.review{background:rgba(37,99,235,.12);color:var(--info)}
+.projectStatus.followup{background:rgba(220,38,38,.12);color:var(--bad)}
+.projectStatus.issue{background:rgba(217,119,6,.14);color:var(--warn)}
+.projectStatus.done{background:rgba(22,163,74,.13);color:var(--ok)}
+.projectEmpty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:14px}
+.projectCountTitle{font-size:12px;color:var(--muted);font-weight:800}
+.projectCountTitle b{color:var(--text);font-size:14px}
+@media(max-width:900px){
+  .projectCenterToolbar{grid-template-columns:1fr 1fr}
+}
+@media(max-width:650px){
+  .projectCenterToolbar{grid-template-columns:1fr}
+  .projectCard{grid-template-columns:1fr}
+  .projectCardActions{justify-content:flex-start}
+  .activeProjectActions{width:100%}
+  .activeProjectActions .btn{flex:1;justify-content:center}
+  .activeProjectChips{gap:4px}
+}
+
+
+
+/* ===== Dashboard NCR Photos v7.3.10 ===== */
+.dashNcrPhotos{margin-top:11px;padding-top:10px;border-top:1px dashed var(--border)}
+.dashNcrPhotosHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.dashNcrPhotosTitle{font-size:11.5px;font-weight:800;color:var(--muted)}
+.dashNcrThumbs{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px}
+.dashNcrThumb{
+  width:58px;height:58px;flex:0 0 58px;object-fit:cover;border-radius:10px;
+  border:1px solid var(--border);background:var(--chip);cursor:pointer;
+  box-shadow:0 2px 8px rgba(23,32,63,.08)
+}
+.dashNcrThumb:hover{transform:translateY(-1px)}
+.dashNcrPhotoEmpty{font-size:11px;color:var(--muted);padding:5px 0}
+.dashNcrAllBtn{border:0;background:transparent;color:var(--info);font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;padding:3px}
+
+
+
+/* ===== NCR Swipe Gallery v7.3.10 ===== */
+#modal.galleryMode{touch-action:pan-y;overflow:hidden}
+#modal.galleryMode .galleryNav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.16);color:#fff;font-size:26px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  backdrop-filter:blur(4px);z-index:3
+}
+#modal.galleryMode .galleryPrev{right:14px}
+#modal.galleryMode .galleryNext{left:14px}
+#modal.galleryMode .galleryCounter{
+  position:absolute;top:18px;right:50%;transform:translateX(50%);
+  background:rgba(0,0,0,.38);color:#fff;border-radius:999px;
+  padding:5px 11px;font-size:12px;font-weight:800;z-index:3
+}
+#modal.galleryMode .cap{
+  max-width:92%;text-align:center;line-height:1.8;
+  background:rgba(0,0,0,.28);padding:6px 10px;border-radius:10px
+}
+@media(max-width:650px){
+  #modal.galleryMode .galleryNav{width:38px;height:38px;font-size:22px}
+}
+
 </style>
 </head>
 <body>
@@ -319,22 +417,96 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 <div class="wrap headerRow">
 <div class="brand">
   <img src="./icon-192.png" alt="لوگوی Fire Executive Pro">
-<div><h1>دستیار مهندسی ایمنی و آتش‌نشانی</h1><p>مبحث ۳ (۱۳۹۵) و مبحث ۱۴ (۱۳۹۶) + NFPA · نسخه پایدار v7.3.3</p></div>
+<div><h1>دستیار مهندسی ایمنی و آتش‌نشانی</h1><p>مبحث ۳ (۱۳۹۵) و مبحث ۱۴ (۱۳۹۶) + NFPA · نسخه پایدار v7.3.10</p></div>
 </div>
 <div class="projBox">
 <span id="netBadge" class="netBadge hidden">📴 آفلاین</span>
-<label>📁 پروژه</label>
-<select id="projSel" style="width:auto"></select>
-<button class="btn small primary" id="btnProjNew">➕ جدید</button>
-<button class="btn small ghost" id="btnProjRen">✏️</button>
-<button class="btn small danger" id="btnProjDel">🗑</button>
 <button class="btn small ghost" id="btnTheme">🌙</button>
 </div>
 </div>
+
+<div class="wrap activeProjectStrip">
+  <div class="activeProjectStripRow">
+    <div class="activeProjectMain">
+      <span class="activeProjectDot"></span>
+      <div>
+        <div class="activeProjectTitle">پروژه فعال</div>
+        <div class="activeProjectName" id="activeProjectName">—</div>
+        <div class="activeProjectChips">
+          <span class="projectMetaChip" id="activeProjectCode">کد: —</span>
+          <span class="projectMetaChip" id="activeProjectStatus">در حال بررسی</span>
+          <span class="projectMetaChip" id="activeProjectAddress">آدرس ثبت نشده</span>
+        </div>
+      </div>
+    </div>
+    <div class="activeProjectActions">
+      <button class="btn small primary" id="btnProjectSwitch">🔄 تغییر پروژه</button>
+    </div>
+  </div>
+</div>
+
 <div class="wrap typeBar" id="typeBar"></div>
 </header>
 <nav class="tabsWrap"><div class="wrap tabs" id="tabs"></div></nav>
 <main class="wrap">
+
+
+<section class="sec hidden" id="sec-projects">
+<div class="sectionHead">
+  <div>
+    <h2>📁 مدیریت پروژه‌ها <span class="projectCountTitle">(<b id="projectVisibleCount">۰</b> پروژه)</span></h2>
+    <p>جست‌وجو، فیلتر وضعیت، مرتب‌سازی و گروه‌بندی ماهانه پرونده‌های پروژه</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="cardHead">
+    <div><h3>🔎 پیدا کردن پروژه</h3><div class="sub">نام پروژه، مالک، آدرس یا کد پروژه را جست‌وجو کنید.</div></div>
+    <button class="btn primary" id="btnProjectCenterNew">➕ پروژه جدید</button>
+  </div>
+
+  <div class="projectCenterToolbar">
+    <div class="field"><label>جست‌وجو</label><input id="projectSearch" type="text" placeholder="مثلاً: ادیبی، خیابان فرهنگ، FE-1405..."></div>
+    <div class="field"><label>بازه زمانی</label>
+      <select id="projectTimeFilter">
+        <option value="thisMonth">این ماه</option>
+        <option value="lastMonth">ماه قبل</option>
+        <option value="threeMonths">سه ماه اخیر</option>
+        <option value="thisYear">امسال</option>
+        <option value="all">همه پروژه‌ها</option>
+      </select>
+    </div>
+    <div class="field"><label>وضعیت</label>
+      <select id="projectStatusFilter">
+        <option value="all">همه وضعیت‌ها</option>
+        <option value="review">🔵 در حال بررسی</option>
+        <option value="followup">🔴 نیازمند پیگیری</option>
+        <option value="issue">🟠 دارای نقص</option>
+        <option value="done">🟢 تکمیل‌شده</option>
+      </select>
+    </div>
+    <div class="field"><label>مرتب‌سازی</label>
+      <select id="projectSort">
+        <option value="newest">تاریخ ایجاد — جدیدترین</option>
+        <option value="oldest">تاریخ ایجاد — قدیمی‌ترین</option>
+        <option value="az">نام — الف تا ی</option>
+        <option value="za">نام — ی تا الف</option>
+        <option value="updated">آخرین ویرایش</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="projectSummaryBar">
+    <span class="projectSummaryPill">کل پروژه‌ها: <b id="projectTotalCount">۰</b></span>
+    <span class="projectSummaryPill">در حال بررسی: <b id="projectReviewCount">۰</b></span>
+    <span class="projectSummaryPill">نیازمند پیگیری: <b id="projectFollowCount">۰</b></span>
+    <span class="projectSummaryPill">دارای نقص: <b id="projectIssueCount">۰</b></span>
+    <span class="projectSummaryPill">تکمیل‌شده: <b id="projectDoneCount">۰</b></span>
+  </div>
+</div>
+
+<div id="projectCenterList" style="margin-top:12px"></div>
+</section>
 
 <section class="sec" id="sec-dash">
 <div class="card" id="licenseCard" style="margin-bottom:14px">
@@ -762,12 +934,19 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
 </section>
 </main>
 <footer>
-<b>دستیار مهندسی ایمنی و آتش‌نشانی — نسخه پایدار v7.3.3</b><br>
+<b>دستیار مهندسی ایمنی و آتش‌نشانی — نسخه پایدار v7.3.10</b><br>
 منابع اصلی: <b>مبحث سوم حفاظت ساختمان‌ها در مقابل حریق (ویرایش سوم ۱۳۹۵)</b> · <b>مبحث چهاردهم تأسیسات مکانیکی (ویرایش ۱۳۹۶)</b><br>
 <span style="font-size:10px">inbr.ir/mabhas3-95.pdf · inbr.ir/mabhas14-96.pdf · به‌همراه مراجع NFPA 13/20/37/92/10</span><br>
-برآورد اولیه کارگاهی — نه طراحی قطعی · ذخیره‌سازی: عکس‌ها در IndexedDB + متادیتا در localStorage · آماده PWA
+برآورد اولیه کارگاهی — نه طراحی قطعی · ذخیره‌سازی محلی اطلاعات و تصاویر پروژه · آماده PWA
 </footer>
-<div class="modal hidden" id="modal"><button id="modalClose">✕</button><img id="modalImg" alt=""><div class="cap" id="modalCap"></div></div>
+<div class="modal hidden" id="modal">
+<button id="modalClose">✕</button>
+<div class="galleryCounter hidden" id="galleryCounter"></div>
+<button class="galleryNav galleryPrev hidden" id="galleryPrev">›</button>
+<button class="galleryNav galleryNext hidden" id="galleryNext">‹</button>
+<img id="modalImg" alt="">
+<div class="cap" id="modalCap"></div>
+</div>
 <div id="helpTourModal" class="modal hidden"><div class="modalBox"><div class="cardHead"><h2 id="tourTitle">تور سریع</h2><button class="btn ghost small" id="tourClose" style="position:static">✕</button></div><div id="tourBody" style="margin:12px 0"></div><div class="row" style="justify-content:space-between"><button id="tourPrev" class="btn ghost">قبلی</button><button id="tourNext" class="btn primary">بعدی</button></div></div></div>
 <div id="toasts"></div>
 <div id="printArea"></div>
@@ -872,13 +1051,14 @@ saveAll(); renderFloors(); renderDash(); renderRuleEngine(); toast('🏢 باز�
 $('btnFloorClear').onclick=()=>{if(!getFloors().length)return;if(confirm('تمام بازه‌های طبقات این پروژه حذف شود؟')){D().meta.floors=[];saveAll();renderFloors();renderDash();renderRuleEngine();toast('🧹 ساختار طبقات پاک شد');}};
 }
 /* ================= تب‌ها (یکپارچه) ================= */
-const TAB_DEFS=[['dash','📊 داشبورد'],['calcs','🧮 محاسبات'],['check','✅ چک‌لیست‌ها <span class="tb" id="tbCheck"></span>'],['numcheck','📐 بررسی عددی'],['ncr','⚠️ عدم انطباق <span class="tb" id="tbNcr"></span>'],['std','📚 استانداردها'],['m3','📘 مبحث ۳'],['m14','⚙️ مبحث ۱۴'],['matrix','🧩 ماتریس مقررات'],['ruleengine','🧠 الزامات فعال'],['floors','🏢 طبقات و تصرف‌ها'],['parkingzones','🚗 زون‌های پارکینگ'],['duct','🌀 کانال'],['fan','🌀 انتخاب فن'],['smoke','🔥 کنترل دود'],['network','🕸️ شبکه هیدرولیکی'],['hydloss','📐 افت فشار مسیر'],['topology','🔗 توپولوژی'],['pathanalysis','🧭 تحلیل مسیر'],['equipment','🧰 تجهیزات سیستم'],['calcaudit','🔎 کنترل کیفیت'],['projectaudit','🧠 کنترل پروژه'],['specialistTools','🧰 ابزارهای تخصصی'],['helpcenter','🎓 راهنما'],['report','📄 گزارش']];
+const TAB_DEFS=[['dash','📊 داشبورد'],['projects','📁 پروژه‌ها'],['calcs','🧮 محاسبات'],['check','✅ چک‌لیست‌ها <span class="tb" id="tbCheck"></span>'],['numcheck','📐 بررسی عددی'],['ncr','⚠️ عدم انطباق <span class="tb" id="tbNcr"></span>'],['std','📚 استانداردها'],['m3','📘 مبحث ۳'],['m14','⚙️ مبحث ۱۴'],['matrix','🧩 ماتریس مقررات'],['ruleengine','🧠 الزامات فعال'],['floors','🏢 طبقات و تصرف‌ها'],['parkingzones','🚗 زون‌های پارکینگ'],['duct','🌀 کانال'],['fan','🌀 انتخاب فن'],['smoke','🔥 کنترل دود'],['network','🕸️ شبکه هیدرولیکی'],['hydloss','📐 افت فشار مسیر'],['topology','🔗 توپولوژی'],['pathanalysis','🧭 تحلیل مسیر'],['equipment','🧰 تجهیزات سیستم'],['calcaudit','🔎 کنترل کیفیت'],['projectaudit','🧠 کنترل پروژه'],['specialistTools','🧰 ابزارهای تخصصی'],['helpcenter','🎓 راهنما'],['report','📄 گزارش']];
 function renderTabs(){
 $('tabs').innerHTML=TAB_DEFS.map(d=>'<button class="tabBtn" data-tab="'+d[0]+'">'+d[1]+'</button>').join('');
 document.querySelectorAll('.tabBtn').forEach(b=>b.onclick=()=>{
 document.querySelectorAll('.tabBtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');
 document.querySelectorAll('.sec').forEach(s=>s.classList.add('hidden'));
 $('sec-'+b.dataset.tab).classList.remove('hidden');
+if(b.dataset.tab==='projects')renderProjectCenter();
 });
 $('tabs').querySelector('[data-tab="dash"]').classList.add('on');
 if(window.renderMabhas3) setTimeout(window.renderMabhas3,0);
@@ -886,7 +1066,13 @@ if(window.renderMabhas14) setTimeout(window.renderMabhas14,0);
 setTimeout(bindMatrix,0);
 }
 function renderHeader(){
-$('projSel').innerHTML=S.projects.map(p=>'<option value="'+p.id+'" '+(p.id===S.activeId?'selected':'')+'>'+p.name+'</option>').join('');
+const p=S.projects.find(x=>x.id===S.activeId)||{};
+const d=S.data?.[S.activeId]||{};
+const m=d.meta||{};
+if($('activeProjectName')) $('activeProjectName').textContent=p.name||'پروژه بدون نام';
+if($('activeProjectCode')) $('activeProjectCode').textContent='کد: '+(p.code||'—');
+if($('activeProjectStatus')) $('activeProjectStatus').textContent=projectStatusLabel(p.status||'review');
+if($('activeProjectAddress')) $('activeProjectAddress').textContent=(p.address||m.address||'آدرس ثبت نشده');
 $('btnTheme').textContent=S.theme==='dark'?'☀️':'🌙';
 }
 function renderTypeBar(){
@@ -924,8 +1110,9 @@ $('dashStats').innerHTML=
 '<div class="num">'+fmt(pct,0)+'٪</div><div class="bar"><i style="width:'+pct+'%"></i></div>'+
 '<div class="miniRow"><span><i class="dot" style="background:var(--ok)"></i>تأیید '+faN(ok)+'</span><span><i class="dot" style="background:var(--bad)"></i>رد '+faN(no)+'</span><span><i class="dot" style="background:var(--muted)"></i>در انتظار '+faN(pend)+'</span></div></div>'+
 '<div class="card statCard"><div class="ico">⚠️</div><h3>وضعیت NCRها</h3>'+
-'<div class="num">'+faN(d.ncrs.length)+'</div><div class="sub" style="margin:4px 0">عدم انطباق ثبت‌شده · عکس‌ها در IndexedDB</div>'+
-'<div class="miniRow"><span style="color:var(--info)">باز '+faN(open)+'</span><span style="color:var(--warn)">در حال رفع '+faN(prog)+'</span><span style="color:var(--ok)">بسته '+faN(closed)+'</span><span style="color:var(--bad)">⏰ '+faN(over)+'</span></div></div>'+
+'<div class="num">'+faN(d.ncrs.length)+'</div><div class="sub" style="margin:4px 0">عدم انطباق ثبت‌شده · <span id="dashNcrPhotoCount">۰ عکس ثبت‌شده</span></div>'+
+'<div class="miniRow"><span style="color:var(--info)">باز '+faN(open)+'</span><span style="color:var(--warn)">در حال رفع '+faN(prog)+'</span><span style="color:var(--ok)">بسته '+faN(closed)+'</span><span style="color:var(--bad)">⏰ '+faN(over)+'</span></div>'+
+'<div class="dashNcrPhotos"><div class="dashNcrPhotosHead"><span class="dashNcrPhotosTitle">📷 آخرین تصاویر عدم‌انطباق</span><button class="dashNcrAllBtn" id="btnDashNcrAll">مشاهده همه</button></div><div class="dashNcrThumbs" id="dashNcrThumbs"><span class="dashNcrPhotoEmpty">در حال بررسی تصاویر...</span></div></div></div>'+
 '<div class="card statCard"><div class="ico">🧮</div><h3>محاسبات ثبت‌شده</h3>'+
 '<div class="num">'+faN(d.calcs.length)+'</div><div class="sub" style="margin:4px 0">در گزارش پروژه</div>'+
 '<div class="miniRow"><span>نوع ساختمان: '+bt+'</span></div></div>';
@@ -939,6 +1126,7 @@ $('dashCalcs').innerHTML=d.calcs.length?d.calcs.map(c=>
 '<table>'+c.lines.map(l=>'<tr><td>'+l[0]+'</td><td>'+l[1]+'</td></tr>').join('')+'</table></div>').join('')
 :'<div class="sub">هیچ محاسباتی ثبت نشده است.</div>';
 renderBadges();
+renderDashNcrPhotos();
 }
 function delCalc(id){const d=D();d.calcs=d.calcs.filter(c=>c.id!==id);saveAll();renderDash();toast('🗑 محاسبه حذف شد');}
 /* ================= چک‌لیست هوشمند مقرراتی ================= */
@@ -970,7 +1158,7 @@ host.querySelectorAll('.regBtn').forEach(b=>b.onclick=e=>{const id=e.target.clos
 host.querySelectorAll('[data-regnote]').forEach(t=>t.onchange=e=>{const id=e.target.dataset.regnote;const cur=d.regChecks[id]||{s:0,note:'',ts:null};d.regChecks[id]={...cur,note:e.target.value,ts:Date.now()};saveAll();});
 }
 function exportRegChecklist(){
-const d=D(), lines=['FIRE EXECUTIVE PRO v7.3.3 — چک‌لیست هوشمند مقرراتی','پروژه: '+(D().meta?.address||'بدون عنوان'),'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
+const d=D(), lines=['FIRE EXECUTIVE PRO v7.3.10 — چک‌لیست هوشمند مقرراتی','پروژه: '+(D().meta?.address||'بدون عنوان'),'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
 REG_CHECKS.filter(r=>r.when(d)).forEach((r,i)=>{const st=d.regChecks?.[r.id]||{s:0,note:''};lines.push(`${i+1}. ${r.title}`);lines.push(`وضعیت: ${regStatusLabel(st.s)}`);lines.push(`مرجع: ${r.src} — ${r.ref}`);lines.push(`یادداشت: ${st.note||'—'}`);lines.push('');});
 dlText(lines.join('\n'),'regulatory_checklist_v7_3_2.txt','text/plain;charset=utf-8');
 }
@@ -1308,7 +1496,124 @@ if(photoCache[id]){el.src=photoCache[id];return;}
 idbGet('photos',id).then(src=>{if(src){cachePhoto(id,src);el.src=src;}else el.style.display='none';});
 });
 }
-function viewImg(src,capTxt){$('modalImg').src=src;$('modalCap').textContent=capTxt||'';$('modal').classList.remove('hidden');}
+
+let ncrGalleryItems=[],ncrGalleryIndex=0,ncrTouchStartX=0;
+
+function viewImg(src,capTxt){
+  ncrGalleryItems=[{src,cap:capTxt||''}];
+  ncrGalleryIndex=0;
+  openNcrGallery();
+}
+
+function openNcrGallery(items,index){
+  if(Array.isArray(items) && items.length) ncrGalleryItems=items;
+  if(Number.isInteger(index)) ncrGalleryIndex=Math.max(0,Math.min(index,ncrGalleryItems.length-1));
+  if(!ncrGalleryItems.length)return;
+  const modal=$('modal');
+  modal.classList.add('galleryMode');
+  renderNcrGallerySlide();
+  modal.classList.remove('hidden');
+}
+
+function renderNcrGallerySlide(){
+  const item=ncrGalleryItems[ncrGalleryIndex];
+  if(!item)return;
+  $('modalImg').src=item.src;
+  $('modalCap').textContent=item.cap||'';
+  const many=ncrGalleryItems.length>1;
+  $('galleryCounter').textContent=faN(ncrGalleryIndex+1)+' از '+faN(ncrGalleryItems.length);
+  $('galleryCounter').classList.toggle('hidden',!many);
+  $('galleryPrev').classList.toggle('hidden',!many);
+  $('galleryNext').classList.toggle('hidden',!many);
+}
+
+function ncrGalleryMove(delta){
+  if(ncrGalleryItems.length<2)return;
+  ncrGalleryIndex=(ncrGalleryIndex+delta+ncrGalleryItems.length)%ncrGalleryItems.length;
+  renderNcrGallerySlide();
+}
+
+function bindNcrGallery(){
+  if(window.__ncrGalleryBound)return;
+  window.__ncrGalleryBound=true;
+  if($('galleryPrev')) $('galleryPrev').onclick=()=>ncrGalleryMove(-1);
+  if($('galleryNext')) $('galleryNext').onclick=()=>ncrGalleryMove(1);
+
+  const modal=$('modal');
+  if(modal){
+    modal.addEventListener('touchstart',e=>{
+      ncrTouchStartX=e.changedTouches?.[0]?.screenX||0;
+    },{passive:true});
+    modal.addEventListener('touchend',e=>{
+      const endX=e.changedTouches?.[0]?.screenX||0;
+      const dx=endX-ncrTouchStartX;
+      if(Math.abs(dx)>45) ncrGalleryMove(dx>0?-1:1);
+    },{passive:true});
+  }
+
+  document.addEventListener('keydown',e=>{
+    if($('modal')?.classList.contains('hidden'))return;
+    if(e.key==='ArrowRight') ncrGalleryMove(-1);
+    if(e.key==='ArrowLeft') ncrGalleryMove(1);
+  });
+}
+
+
+async function renderDashNcrPhotos(){
+  const countEl=$('dashNcrPhotoCount');
+  const host=$('dashNcrThumbs');
+  const allBtn=$('btnDashNcrAll');
+  if(!countEl||!host)return;
+
+  const ncrs=(D().ncrs||[]).slice().sort((a,b)=>(b.ts||0)-(a.ts||0));
+  const refs=[];
+  ncrs.forEach(n=>{
+    if(n.afterId) refs.push({id:n.afterId,n,kind:'بعد'});
+    if(n.beforeId) refs.push({id:n.beforeId,n,kind:'قبل'});
+  });
+
+  countEl.textContent=faN(refs.length)+' عکس ثبت‌شده';
+
+  if(allBtn){
+    allBtn.onclick=()=>{
+      const b=document.querySelector('.tabBtn[data-tab="ncr"]');
+      if(b)b.click();
+    };
+  }
+
+  if(!refs.length){
+    host.innerHTML='<span class="dashNcrPhotoEmpty">هنوز تصویری برای عدم‌انطباق‌ها ثبت نشده است.</span>';
+    return;
+  }
+
+  const gallery=[];
+  for(const r of refs){
+    const src=photoCache[r.id]||await idbGet('photos',r.id);
+    if(!src)continue;
+    cachePhoto(r.id,src);
+    gallery.push({
+      src,
+      cap:(r.n.code||'NCR')+' — '+(r.n.loc||r.n.system||'—')+' — عکس '+r.kind
+    });
+  }
+
+  if(!gallery.length){
+    host.innerHTML='<span class="dashNcrPhotoEmpty">تصاویر ثبت شده‌اند اما در این دستگاه در دسترس نیستند.</span>';
+    return;
+  }
+
+  host.innerHTML='';
+  gallery.slice(0,6).forEach((g,i)=>{
+    const img=document.createElement('img');
+    img.className='dashNcrThumb';
+    img.src=g.src;
+    img.alt='تصویر عدم‌انطباق';
+    img.title=g.cap;
+    img.onclick=()=>openNcrGallery(gallery,i);
+    host.appendChild(img);
+  });
+}
+
 /* ================= NCR ================= */
 function ncrOver(n){return n.status!=='closed'&&n.deadline&&n.deadline<todayStr();}
 function renderNcr(){
@@ -1442,6 +1747,8 @@ m.reportNo=$('rReportNo').value;
 m.docNo=$('rDocNo').value;
 m.result=$('rResult').value;
 m.note=$('rNote').value;
+const pp=S.projects.find(x=>x.id===S.activeId);
+if(pp){pp.address=m.address||pp.address||'';pp.updatedAt=Date.now();}
 saveAll();
 };
 ['rAddress','rDate','rInspector','rClient','rReportNo','rDocNo','rResult','rNote'].forEach(id=>{
@@ -1450,44 +1757,12 @@ $(id).oninput=updateMeta;
 });
 }
 function initProjectEvents(){
-$('projSel').onchange=e=>{
-S.activeId=e.target.value;
-saveAll();
-refreshAllUI();
-toast('📁 پروژه فعال تغییر کرد');
-};
-$('btnProjNew').onclick=()=>{
-const name=prompt('نام پروژه جدید را وارد کنید:');
-if(!name||!name.trim())return;
-const id='p_'+uid();
-S.projects.push({id,name:name.trim()});
-S.data[id]=defaultProjectData();
-S.activeId=id;
-saveAll();
-refreshAllUI();
-toast('➕ پروژه جدید ساخته شد');
-};
-$('btnProjRen').onclick=()=>{
-const p=S.projects.find(x=>x.id===S.activeId);
-if(!p)return;
-const name=prompt('نام جدید پروژه:',p.name);
-if(!name||!name.trim())return;
-p.name=name.trim();
-saveAll();
-renderHeader();
-toast('✏️ نام پروژه تغییر کرد');
-};
-$('btnProjDel').onclick=()=>{
-if(S.projects.length<=1){toast('⚠️ حداقل یک پروژه باید وجود داشته باشد','err');return;}
-if(!confirm('آیا از حذف این پروژه و تمام داده‌های آن مطمئن هستید؟'))return;
-const delId=S.activeId;
-S.projects=S.projects.filter(p=>p.id!==delId);
-delete S.data[delId];
-S.activeId=S.projects[0].id;
-saveAll();
-refreshAllUI();
-toast('🗑 پروژه حذف شد');
-};
+if($('btnProjectSwitch')) $('btnProjectSwitch').onclick=()=>openProjectsCenter();
+if($('btnProjectCenterNew')) $('btnProjectCenterNew').onclick=createProjectInteractive;
+if($('projectSearch')) $('projectSearch').oninput=renderProjectCenter;
+if($('projectTimeFilter')) $('projectTimeFilter').onchange=renderProjectCenter;
+if($('projectStatusFilter')) $('projectStatusFilter').onchange=renderProjectCenter;
+if($('projectSort')) $('projectSort').onchange=renderProjectCenter;
 $('btnTheme').onclick=()=>{
 S.theme=S.theme==='dark'?'light':'dark';
 document.documentElement.setAttribute('data-theme',S.theme);
@@ -1495,6 +1770,173 @@ saveAll();
 renderHeader();
 };
 }
+
+/* ================= مرکز مدیریت پروژه‌ها v7.3.10 ================= */
+const PROJECT_STATUS={
+  review:{label:'🔵 در حال بررسی',cls:'review'},
+  followup:{label:'🔴 نیازمند پیگیری',cls:'followup'},
+  issue:{label:'🟠 دارای نقص',cls:'issue'},
+  done:{label:'🟢 تکمیل‌شده',cls:'done'}
+};
+function projectStatusLabel(k){return (PROJECT_STATUS[k]||PROJECT_STATUS.review).label;}
+function normalizeProject(p,i){
+  if(!p.createdAt) p.createdAt=Date.now()-(i*86400000);
+  if(!p.updatedAt) p.updatedAt=p.createdAt;
+  if(!p.status) p.status='review';
+  if(!p.code) p.code='FE-'+String(new Date(p.createdAt).getFullYear()).slice(-2)+'-'+String(i+1).padStart(3,'0');
+  if(p.owner==null) p.owner='';
+  if(p.address==null) p.address=(S.data?.[p.id]?.meta?.address||'');
+  return p;
+}
+function ensureProjectSchema(){
+  S.projects.forEach((p,i)=>normalizeProject(p,i));
+}
+function projectDateObj(p){return new Date(Number(p.createdAt)||Date.now());}
+function projectMonthKey(p){
+  const d=projectDateObj(p);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+function projectMonthLabel(p){
+  try{return projectDateObj(p).toLocaleDateString('fa-IR',{year:'numeric',month:'long'});}
+  catch(e){return projectMonthKey(p);}
+}
+function inProjectTimeFilter(p,f){
+  if(f==='all')return true;
+  const d=projectDateObj(p),now=new Date();
+  const y=d.getFullYear(),m=d.getMonth(),ny=now.getFullYear(),nm=now.getMonth();
+  if(f==='thisMonth')return y===ny&&m===nm;
+  if(f==='lastMonth'){const x=new Date(ny,nm-1,1);return y===x.getFullYear()&&m===x.getMonth();}
+  if(f==='threeMonths'){const start=new Date(ny,nm-2,1);return d>=start;}
+  if(f==='thisYear')return y===ny;
+  return true;
+}
+function sortProjects(arr,mode){
+  const a=arr.slice();
+  if(mode==='oldest') a.sort((x,y)=>x.createdAt-y.createdAt);
+  else if(mode==='az') a.sort((x,y)=>(x.name||'').localeCompare(y.name||'','fa'));
+  else if(mode==='za') a.sort((x,y)=>(y.name||'').localeCompare(x.name||'','fa'));
+  else if(mode==='updated') a.sort((x,y)=>(y.updatedAt||0)-(x.updatedAt||0));
+  else a.sort((x,y)=>(y.createdAt||0)-(x.createdAt||0));
+  return a;
+}
+function openProjectsCenter(){
+  const b=document.querySelector('.tabBtn[data-tab="projects"]');
+  if(b)b.click();
+  setTimeout(()=>{renderProjectCenter();$('projectSearch')?.focus();},0);
+}
+function createProjectInteractive(){
+  const name=prompt('نام پروژه جدید را وارد کنید:');
+  if(!name||!name.trim())return;
+  const owner=prompt('نام مالک / کارفرما (اختیاری):','')||'';
+  const address=prompt('آدرس پروژه (اختیاری):','')||'';
+  const id='p_'+uid(),now=Date.now();
+  const seq=S.projects.length+1;
+  const code='FE-'+String(new Date().getFullYear()).slice(-2)+'-'+String(seq).padStart(3,'0');
+  S.projects.push({id,name:name.trim(),owner:owner.trim(),address:address.trim(),code,status:'review',createdAt:now,updatedAt:now});
+  S.data[id]=defaultProjectData();
+  S.data[id].meta.address=address.trim();
+  S.activeId=id;
+  saveAll();
+  refreshAllUI();
+  renderProjectCenter();
+  toast('➕ پروژه جدید ساخته شد');
+}
+function selectProjectFromCenter(id){
+  if(!S.data[id])return;
+  S.activeId=id;
+  const p=S.projects.find(x=>x.id===id); if(p)p.updatedAt=Date.now();
+  saveAll();refreshAllUI();renderProjectCenter();toast('📁 پروژه فعال تغییر کرد');
+}
+function renameProjectFromCenter(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  const name=prompt('نام جدید پروژه:',p.name);
+  if(!name||!name.trim())return;
+  p.name=name.trim();p.updatedAt=Date.now();saveAll();refreshAllUI();renderProjectCenter();toast('✏️ نام پروژه تغییر کرد');
+}
+function changeProjectStatus(id){
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  const order=['review','issue','followup','done'];const i=Math.max(0,order.indexOf(p.status));
+  p.status=order[(i+1)%order.length];p.updatedAt=Date.now();saveAll();renderHeader();renderProjectCenter();toast('🏷️ وضعیت پروژه تغییر کرد');
+}
+function deleteProjectFromCenter(id){
+  if(S.projects.length<=1){toast('⚠️ حداقل یک پروژه باید وجود داشته باشد','err');return;}
+  const p=S.projects.find(x=>x.id===id);if(!p)return;
+  if(!confirm('پروژه «'+p.name+'» و تمام داده‌های آن حذف شود؟'))return;
+  S.projects=S.projects.filter(x=>x.id!==id);delete S.data[id];
+  if(S.activeId===id)S.activeId=S.projects[0].id;
+  saveAll();refreshAllUI();renderProjectCenter();toast('🗑 پروژه حذف شد');
+}
+function renderProjectCenter(){
+  if(!$('projectCenterList'))return;
+  ensureProjectSchema();
+  const q=($('projectSearch')?.value||'').trim().toLowerCase();
+  const tf=$('projectTimeFilter')?.value||'thisMonth';
+  const sf=$('projectStatusFilter')?.value||'all';
+  const sort=$('projectSort')?.value||'newest';
+
+  const total=S.projects.length;
+  const counts={review:0,followup:0,issue:0,done:0};
+  S.projects.forEach(p=>counts[p.status||'review']=(counts[p.status||'review']||0)+1);
+  if($('projectTotalCount'))$('projectTotalCount').textContent=faN(total);
+  if($('projectReviewCount'))$('projectReviewCount').textContent=faN(counts.review||0);
+  if($('projectFollowCount'))$('projectFollowCount').textContent=faN(counts.followup||0);
+  if($('projectIssueCount'))$('projectIssueCount').textContent=faN(counts.issue||0);
+  if($('projectDoneCount'))$('projectDoneCount').textContent=faN(counts.done||0);
+
+  let rows=S.projects.filter(p=>{
+    const d=S.data?.[p.id]||{},m=d.meta||{};
+    const hay=[p.name,p.owner,p.address,m.address,p.code].join(' ').toLowerCase();
+    return (!q||hay.includes(q)) && inProjectTimeFilter(p,tf) && (sf==='all'||p.status===sf);
+  });
+  rows=sortProjects(rows,sort);
+  if($('projectVisibleCount'))$('projectVisibleCount').textContent=faN(rows.length);
+
+  if(!rows.length){
+    $('projectCenterList').innerHTML='<div class="projectEmpty">پروژه‌ای با این فیلتر پیدا نشد.</div>';return;
+  }
+
+  const groups={};
+  rows.forEach(p=>{const k=projectMonthKey(p);(groups[k]??=[]).push(p);});
+  const keys=Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+  $('projectCenterList').innerHTML=keys.map((k,gi)=>{
+    const list=groups[k],label=projectMonthLabel(list[0]);
+    return `<div class="projectMonthGroup">
+      <div class="projectMonthHead" data-month="${k}">
+        <span>📅 ${esc(label)}</span><small>${faN(list.length)} پروژه · برای باز/بسته کردن لمس کنید</small>
+      </div>
+      <div class="projectMonthBody ${gi>1?'collapsed':''}" id="pm_${k.replace('-','_')}">
+        ${list.map(p=>{
+          const m=S.data?.[p.id]?.meta||{};
+          const st=PROJECT_STATUS[p.status]||PROJECT_STATUS.review;
+          return `<div class="projectCard ${p.id===S.activeId?'active':''}">
+            <div>
+              <div class="projectCardName">${esc(p.name||'پروژه بدون نام')}</div>
+              <div class="projectCardMeta">
+                <span>${esc(p.code||'بدون کد')}</span>
+                ${p.owner?`<span>👤 ${esc(p.owner)}</span>`:''}
+                <span>📍 ${esc(p.address||m.address||'آدرس ثبت نشده')}</span>
+                <span>🕒 ${faTime(p.updatedAt||p.createdAt)}</span>
+                <span class="projectStatus ${st.cls}">${st.label}</span>
+                ${p.id===S.activeId?'<span class="projectStatus done">✓ پروژه فعال</span>':''}
+              </div>
+            </div>
+            <div class="projectCardActions">
+              ${p.id!==S.activeId?`<button class="btn small primary" onclick="selectProjectFromCenter('${p.id}')">انتخاب</button>`:'<button class="btn small ghost" disabled>فعال</button>'}
+              <button class="btn small ghost" onclick="changeProjectStatus('${p.id}')">وضعیت</button>
+              <button class="btn small ghost" onclick="renameProjectFromCenter('${p.id}')">✏️</button>
+              <button class="btn small danger" onclick="deleteProjectFromCenter('${p.id}')">🗑</button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('.projectMonthHead').forEach(h=>h.onclick=()=>{
+    const id='pm_'+h.dataset.month.replace('-','_');$(id)?.classList.toggle('collapsed');
+  });
+}
+
 /* ================= پشتیبان‌گیری و بازیابی ================= */
 async function exportBackup(){
 toast('📦 در حال ساخت فایل پشتیبان جامع...');
@@ -1562,6 +2004,7 @@ $('c4K').innerHTML=K_METRIC.map(k=>'<option value="'+k[0]+'">'+k[1]+'</option>')
 function bindNcrEvents(){
 bindPhoto('before');
 bindPhoto('after');
+bindNcrGallery();
 $('btnNcrAdd').onclick=async()=>{
 const d=D();
 const desc=$('ncrDesc').value.trim();
@@ -1613,6 +2056,7 @@ renderChecklist();
 renderNcr();
 renderStd();
 bindReportInputs();
+renderProjectCenter();
 }
 /* ================= PWA & Service Worker ================= */
 function setupPWA(){
@@ -1731,7 +2175,7 @@ $('ruleQC').innerHTML=qc.length?qc.map(x=>`<div class="ruleItem" style="border-c
 }
 function exportRuleEngine(){
 const fs=getFloors();
-const lines=['FIRE EXECUTIVE PRO v7.3.3 — ارزیابی موتور الزامات','پروژه: '+((S.projects.find(p=>p.id===S.activeId)||{}).name||'—'),'نوع ساختمان: '+buildingTypeLabels().join(' + '),'تعداد بازه طبقات: '+fs.length,'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
+const lines=['FIRE EXECUTIVE PRO v7.3.10 — ارزیابی موتور الزامات','پروژه: '+((S.projects.find(p=>p.id===S.activeId)||{}).name||'—'),'نوع ساختمان: '+buildingTypeLabels().join(' + '),'تعداد بازه طبقات: '+fs.length,'تاریخ: '+new Date().toLocaleString('fa-IR'),''];
 ruleSet().filter(r=>r.on).forEach((r,i)=>{lines.push((i+1)+'. '+r.t);lines.push('مرجع: '+r.ref);lines.push('دلیل فعال‌سازی: '+r.why);lines.push('');});
 lines.push('— کنترل کیفیت ساختار طبقات —');
 $('ruleQC').querySelectorAll('.ruleItem').forEach(el=>lines.push('• '+el.textContent.trim()));
@@ -1754,12 +2198,13 @@ const defaultId='p_def';
 S={
 theme:'light',
 activeId:defaultId,
-projects:[{id:defaultId,name:'پروژه نمونه'}],
+projects:[{id:defaultId,name:'پروژه نمونه',owner:'',address:'',code:'FE-26-001',status:'review',createdAt:Date.now(),updatedAt:Date.now()}],
 data:{[defaultId]:defaultProjectData()}
 };
 } else {
 S=localData;
 }
+ensureProjectSchema();
 await migratePhotos();
 for(const pid of Object.keys(S.data||{})){ if(!S.data[pid].audit) S.data[pid].audit={last:null,history:[]}; if(!Array.isArray(S.data[pid].parkingZones)) S.data[pid].parkingZones=[]; if(!Array.isArray(S.data[pid].parkingFans)) S.data[pid].parkingFans=[]; if(!Array.isArray(S.data[pid].meta?.smokeScenarios)) S.data[pid].meta.smokeScenarios=[]; }
 saveAll();
@@ -1810,7 +2255,7 @@ const tab=map[b.dataset.specialistRoute];
 const btn=document.querySelector(`.tabBtn[data-tab="${tab}"]`);
 if(btn){btn.click();btn.scrollIntoView({behavior:'smooth',inline:'center'});}
 });
-$('modalClose').onclick=()=>$('modal').classList.add('hidden');
+$('modalClose').onclick=()=>{$('modal').classList.add('hidden');$('modal').classList.remove('galleryMode');};
 refreshAllUI();
 initNet();
 initPz();
