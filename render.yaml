@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: fire-executive-dwg
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: MAX_DWG_MB
+        value: "100"
+      - key: DWG_API_TOKEN
+        generateValue: true
