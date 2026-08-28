@@ -1005,6 +1005,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 0 30px;l
       <button class="btn ghost" id="btnDxfSemanticTrainerClear">✕ پاک‌کردن</button>
     </div>
     <div id="dxfSemanticTrainerResult" class="note" style="margin-top:10px">پس از تحلیل نقشه، استخراج را اجرا کنید.</div>
+    <div id="dxfTrainingNavigator" class="note" style="margin-top:10px;display:none"></div>
   </div>
 
   <div class="card">
@@ -5946,7 +5947,41 @@ function dxfTrainLoad(){try{return JSON.parse(localStorage.getItem(DXF_TRAIN_KEY
 function dxfTrainSave(d){localStorage.setItem(DXF_TRAIN_KEY,JSON.stringify(d||{}))}
 function dxfTrainKey(s,n){return s+"|"+String(n||"").trim()}
 function dxfTrainUnknown(s,n){const labels="smoke_detector, heat_detector, manual_call_point, sounder, fire_alarm_panel, irrelevant";const id=prompt("برچسب سمبل را وارد کنید:\n"+labels,n?"":"");if(id===null)return;if(!labels.split(", ").includes(id.trim())){alert("برچسب معتبر نیست");return}const d=dxfTrainLoad();d[dxfTrainKey(s,n)]={source:s,name:n,id:id.trim(),updatedAt:new Date().toISOString()};dxfTrainSave(d);dxfRunSemanticTrainer()}
-function dxfTrainHighlight(s,n){__dxfView.trainingHighlight={source:s,name:n};drawDxfCanvas()}
+function dxfTrainMatches(s,n){
+ return (__dxfAnalysis?.entities||[]).filter(e=>{
+  if(s==='Block')return String(e.block||e.name||'').trim()===n;
+  if(s==='Layer')return String(e.layer||'0').trim()===n;
+  return false;
+ });
+}
+function dxfTrainNavUi(){
+ const box=$('dxfTrainingNavigator');if(!box)return;
+ const arr=__dxfView.trainingNavMatches||[];
+ if(!arr.length){box.style.display='none';box.innerHTML='';return;}
+ const z=__dxfView.trainingHighlight||{};
+ box.style.display='block';
+ box.innerHTML='<div class="ruleItem"><div><b>🎯 '+esc(z.name||'')+'</b><div class="sub">نمونه '+faN((__dxfView.trainingNavIndex||0)+1)+' از '+faN(arr.length)+'</div></div><div class="row" style="gap:6px;flex-wrap:wrap"><button class="btn ghost" onclick="dxfTrainFocus((__dxfView.trainingNavIndex||0)-1)">◀ قبلی</button><button class="btn primary" onclick="dxfTrainFocus((__dxfView.trainingNavIndex||0)+1)">بعدی ▶</button><button class="btn ghost" onclick="dxfTrainFullView()">🗺️ نمای کامل</button></div></div>';
+}
+function dxfTrainFocus(i){
+ const arr=__dxfView.trainingNavMatches||[];if(!arr.length)return;
+ i=(i+arr.length)%arr.length;__dxfView.trainingNavIndex=i;
+ const p=dxfElementAnchor(arr[i]),cv=dxfCanvas();
+ if(p&&cv){
+  __dxfView.scale=Math.max(__dxfView.scale||1,Math.min((__dxfView.scale||1)*3,18));
+  __dxfView.ox=cv.w/2-p.x*__dxfView.scale;
+  __dxfView.oy=cv.h/2+p.y*__dxfView.scale;
+ }
+ drawDxfCanvas();dxfTrainNavUi();
+ const c=dxfCanvas();if(c)c.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function dxfTrainFullView(){if(!__dxfAnalysis)return;dxfFitView();drawDxfCanvas();dxfTrainNavUi();}
+function dxfTrainHighlight(s,n){
+ __dxfView.trainingHighlight={source:s,name:n};
+ __dxfView.trainingNavMatches=dxfTrainMatches(s,n);
+ __dxfView.trainingNavIndex=0;
+ if(__dxfView.trainingNavMatches.length)dxfTrainFocus(0);
+ else{drawDxfCanvas();dxfTrainNavUi();}
+}
 function dxfTrainExport(){const b=new Blob([JSON.stringify({schema:"fire-executive-semantic-v1",items:Object.values(dxfTrainLoad())},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="fire-executive-semantic-dictionary.json";a.click()}
 function dxfTrainImport(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=async()=>{try{const o=JSON.parse(await i.files[0].text()),d=dxfTrainLoad();for(const x of(o.items||[]))if(x.source&&x.name&&x.id)d[dxfTrainKey(x.source,x.name)]=x;dxfTrainSave(d);dxfRunSemanticTrainer()}catch(e){alert("فایل معتبر نیست")}};i.click()}
 function dxfRunSemanticTrainer(){
@@ -5976,7 +6011,7 @@ function dxfRunSemanticTrainer(){
 function dxfTrainByIndex(i){const x=__dxfView.semanticTrainer?.unknownFrequent?.[i];if(x)dxfTrainUnknown(x.source,x.name)}
 function dxfTrainHighlightByIndex(i){const x=__dxfView.semanticTrainer?.unknownFrequent?.[i];if(x)dxfTrainHighlight(x.source,x.name)}
 function dxfClearSemanticTrainer(){
-  __dxfView.semanticTrainer=null;
+  __dxfView.semanticTrainer=null;__dxfView.trainingHighlight=null;__dxfView.trainingNavMatches=[];__dxfView.trainingNavIndex=0;dxfTrainNavUi();
   const sum=$('dxfSemanticTrainerSummary'),el=$('dxfSemanticTrainerResult');
   if(sum)sum.textContent='—';
   if(el)el.textContent='پس از تحلیل نقشه، استخراج را اجرا کنید.';
@@ -6117,7 +6152,7 @@ function clearDxfReview(){
   __dxfView.selected=null;__dxfView.measurePts=[];__dxfView.measureMode=false;__dxfView.travelMode=false;__dxfView.travelResult=null;dxfMeasureUpdate();dxfTravelUpdate();renderDxfExitAnalysis();drawDxfCanvas();
 }
 
-let __dxfView={scale:1,ox:0,oy:0,drag:false,lastX:0,lastY:0,startX:0,startY:0,selected:null,showLabels:false,pointers:new Map(),pinchStartDist:0,pinchStartScale:1,pinchWorld:null,lastTap:0,measureMode:false,measurePts:[],travelMode:false,travelResult:null,autoEgress:null,spaceAnalysis:null,spaceMap:null,exitSeparation:null,spaceFindings:null,alarmRuleResult:null,classifierConfidence:null,spaceConnectivity:null,trainingHighlight:null};
+let __dxfView={scale:1,ox:0,oy:0,drag:false,lastX:0,lastY:0,startX:0,startY:0,selected:null,showLabels:false,pointers:new Map(),pinchStartDist:0,pinchStartScale:1,pinchWorld:null,lastTap:0,measureMode:false,measurePts:[],travelMode:false,travelResult:null,autoEgress:null,spaceAnalysis:null,spaceMap:null,exitSeparation:null,spaceFindings:null,alarmRuleResult:null,classifierConfidence:null,spaceConnectivity:null,trainingHighlight:null,trainingNavIndex:0,trainingNavMatches:[]};
 function dxfCanvas(){
  const c=$('dxfCanvas');if(!c)return null;
  const r=c.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
@@ -6187,7 +6222,17 @@ function drawDxfCanvas(){
    }
    ctx.restore();
  }
- if(__dxfView.trainingHighlight){const z=__dxfView.trainingHighlight;ctx.save();ctx.strokeStyle='#d32f2f';ctx.lineWidth=3;for(const e of __dxfAnalysis.entities){const ok=z.source==='Block'?String(e.block||e.name||'').trim()===z.name:z.source==='Layer'?String(e.layer||'0').trim()===z.name:false;if(!ok)continue;const p=dxfElementAnchor(e);if(!p)continue;const q=dxfScreen(p.x,p.y);ctx.beginPath();ctx.arc(q.x,q.y,10,0,Math.PI*2);ctx.stroke()}ctx.restore()}
+ if(__dxfView.trainingHighlight){
+ const z=__dxfView.trainingHighlight,arr=__dxfView.trainingNavMatches||[],cur=arr[__dxfView.trainingNavIndex||0];
+ ctx.save();ctx.strokeStyle='#d32f2f';ctx.fillStyle='rgba(211,47,47,.18)';ctx.lineWidth=3;
+ for(const e of __dxfAnalysis.entities){
+  const ok=z.source==='Block'?String(e.block||e.name||'').trim()===z.name:z.source==='Layer'?String(e.layer||'0').trim()===z.name:false;
+  if(!ok)continue;
+  const p=dxfElementAnchor(e);if(!p)continue;const q=dxfScreen(p.x,p.y),isCur=e===cur;
+  ctx.beginPath();ctx.arc(q.x,q.y,isCur?17:9,0,Math.PI*2);ctx.fill();ctx.stroke();
+  if(isCur){ctx.save();ctx.font='bold 14px sans-serif';ctx.fillStyle='#b71c1c';ctx.fillText((z.name||'')+' '+((__dxfView.trainingNavIndex||0)+1)+'/'+arr.length,q.x+20,q.y-20);ctx.restore();}
+ }ctx.restore()
+}
  if(__dxfView.spaceFindings?.length){
    ctx.save();ctx.font='bold 12px sans-serif';
    for(let i=0;i<__dxfView.spaceFindings.length;i++){
