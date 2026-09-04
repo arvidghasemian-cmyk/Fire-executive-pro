@@ -638,6 +638,43 @@ html[data-theme="dark"] .project-item.active{
 }
 </style>
 
+
+<style id="chatgpt-soft-dark-light-theme">
+/* v2 test: visibly darker LIGHT theme, visual-only */
+html:not([data-theme="dark"]){
+  --bg:#e4e9f1;
+  --card:#f3f5f8;
+  --text:#111827;
+  --muted:#596579;
+  --border:#c7d0dc;
+  --chip:#dde4ed;
+  --line:#c7d0dc;
+  --card2:#e9edf3;
+  --shadow:0 8px 24px rgba(15,23,42,.10);
+}
+html:not([data-theme="dark"]) body{background:#e4e9f1!important}
+html:not([data-theme="dark"]) header{background:#edf1f6!important;border-bottom-color:#c7d0dc!important}
+html:not([data-theme="dark"]) .tabsWrap{background:#dce3ec!important;border-bottom-color:#c7d0dc!important}
+html:not([data-theme="dark"]) .card,
+html:not([data-theme="dark"]) .stdCard,
+html:not([data-theme="dark"]) .ncrCard,
+html:not([data-theme="dark"]) .projectCard,
+html:not([data-theme="dark"]) .projectWorkflowCard,
+html:not([data-theme="dark"]) .projectProfileHub,
+html:not([data-theme="dark"]) .project-manager{
+  background:#f3f5f8!important;
+  border-color:#c7d0dc!important;
+  box-shadow:0 8px 24px rgba(15,23,42,.09)!important;
+}
+html:not([data-theme="dark"]) input,
+html:not([data-theme="dark"]) select,
+html:not([data-theme="dark"]) textarea{
+  background:#e8edf3!important;
+  border-color:#b8c3d1!important;
+}
+html:not([data-theme="dark"]) .project-item{background:#e9edf3!important;border-color:#c7d0dc!important}
+html:not([data-theme="dark"]) .project-item.active{background:#f2e3e3!important}
+</style>
 </head>
 <body>
 <header>
