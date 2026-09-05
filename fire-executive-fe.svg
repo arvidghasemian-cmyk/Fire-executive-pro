@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Fire Executive Pro FE logo">
+  <rect width="512" height="512" rx="104" fill="#111923"/>
+  <g transform="translate(78 72)">
+    <path d="M22 46h184l-24 58H86l-18 42h95l-24 58H45L0 310h78l28-65h78l24-57h-78l18-42h97l24-58H165l17-42H22z" fill="#F8FAFC"/>
+    <path d="M242 46h95l-26 58h-94zM219 146h95l-25 58h-96zM194 245h95l-25 58h-96z" fill="#B71C1C"/>
+    <path d="M145 293c18-45 53-66 73-93-1 31 17 45 31 60-24 4-40 17-54 35 8-28-5-46-16-62-5 29-14 49-34 60z" fill="#B71C1C"/>
+  </g>
+</svg>
