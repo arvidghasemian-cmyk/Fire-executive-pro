@@ -1,0 +1,17 @@
+{
+  "name": "Fire Executive Pro",
+  "short_name": "Fire Executive Pro",
+  "start_url": "./index-test.html?install=v3",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111923",
+  "theme_color": "#7f1d1d",
+  "icons": [
+    {
+      "src": "./fire-executive-fe-final-v3.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
