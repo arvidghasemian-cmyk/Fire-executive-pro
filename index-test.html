@@ -685,6 +685,39 @@ html[data-theme="dark"] #btnProjectSwitch{background:#581116!important;border-co
   filter:none!important;
 }
 </style>
+
+<style id="project-switch-solid-final">
+/* Force the whole Change Project control to a single flat dark red */
+#activeProjectStrip #btnProjectSwitch,
+#btnProjectSwitch.btn.small.primary,
+button#btnProjectSwitch{
+  background:#c9342d !important;
+  background-color:#c9342d !important;
+  background-image:none !important;
+  color:#fff !important;
+  border-color:#c9342d !important;
+  box-shadow:none !important;
+  filter:none !important;
+  text-shadow:none !important;
+}
+#activeProjectStrip #btnProjectSwitch::before,
+#activeProjectStrip #btnProjectSwitch::after,
+#btnProjectSwitch::before,
+#btnProjectSwitch::after{
+  background:none !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+#activeProjectStrip #btnProjectSwitch:hover,
+#activeProjectStrip #btnProjectSwitch:focus,
+#activeProjectStrip #btnProjectSwitch:active{
+  background:#c9342d !important;
+  background-color:#c9342d !important;
+  background-image:none !important;
+  box-shadow:none !important;
+}
+</style>
 </head>
 <body>
 <header>
