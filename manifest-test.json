@@ -1,0 +1,17 @@
+{
+  "name": "Fire Executive Pro — Test",
+  "short_name": "FireExec Test",
+  "start_url": "./index-test.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111923",
+  "theme_color": "#7f1d1d",
+  "icons": [
+    {
+      "src": "./fire-executive-fe.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
